@@ -13,7 +13,7 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 
 	const path = usePathname();
 	const withSideBar = ["/Form"];
-	const showSideBar = withSideBar.includes(path);
+	const showSideBar = withSideBar.some(a=>path.startsWith(a));
 
 	return(
 		<Layout className="h-screen border-blue-900 border-4 overflow-y-hidden">
@@ -28,6 +28,12 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 				</Content>
 			</Layout>
 		</Layout>
+	)
+}
+
+const WithEvanderLayout = (page: ReactElement) => <EvanderLayout>{page}</EvanderLayout>
+export default WithEvanderLayout;
+
 
 		// <Layout className="h-screen flex flex-col !p-0">
 		// 	{/* HEADER tetap di atas */}
@@ -47,8 +53,3 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 		// 		</Content>
 		// 	</Layout>
 		// </Layout>
-	)
-}
-
-const WithEvanderLayout = (page: ReactElement) => <EvanderLayout>{page}</EvanderLayout>
-export default WithEvanderLayout;
