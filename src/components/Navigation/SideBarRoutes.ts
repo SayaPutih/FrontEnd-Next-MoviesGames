@@ -6,6 +6,10 @@ const sideBarRoutes  = [
 	{
 		path : "/Form/FavoriteCharacter",
 		label : "Characters"
+	},
+	{
+		path : "/Form/FavoriteGame",
+		label : "Games"
 	}
 ]
 
