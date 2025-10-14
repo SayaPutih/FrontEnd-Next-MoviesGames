@@ -1,7 +1,7 @@
 "use client"
 
 import React from "react";
-import {usePathname,useRouter,useRoute} from "next/navigation";
+import {usePathname,useRouter} from "next/navigation";
 import sideBarRoutes  from "./SideBarRoutes.ts";
 
 const App =()=>{
@@ -14,17 +14,26 @@ const App =()=>{
 		router.push(destination)
 	}
 
+	const isActive =(currentRoute)=>{
+		return path === currentRoute;
+	}
+
 	return(
-		<nav className = "border-4 border-yellow-900 w-1/6 flex items-start justify-start flex-col">
+		<nav className = "w-1/6 flex items-start justify-start flex-col gap-[0.25rem] bg-third  ">
 			
 			{
 				sideBarRoutes .map((a,i)=>{
 					return(
 					<div 
 						key = {i}
-						className="text-black flex items-center justify-center border-2 border-yellow-300 w-full p-2"
+						className={` text-black flex items-center  justify-center shadow-lg text-second w-full p-2 ${isActive(a.path) ? "bg-yellow-100" : ""}`}
 					>
-						<button onClick={()=>redirectPage(a.path)}>{a.label}</button>
+						<button 
+							onClick={()=>redirectPage(a.path)} 
+							className={`font-bold ${isActive(a.path) ? " text-first" : "text-yellow-600"}`}
+						>
+							{a.label}
+						</button>
 					</div>
 					)
 				})

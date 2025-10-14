@@ -16,14 +16,14 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 	const showSideBar = withSideBar.some(a=>path.startsWith(a));
 
 	return(
-		<Layout className="h-screen border-blue-900 border-4 overflow-y-hidden">
-			<Header className = "!p-0 flex items-start justify-start flex-col border-blue-400 border-4">
+		<Layout className="h-screen  overflow-y-hidden">
+			<Header className = "!p-0 flex items-start justify-start flex-col">
 				<NavigationBar />
 			</Header>
-			<Layout className="!p-0 flex-row min-h-0 flex shrink-0 border-blue-600 border-4 flex-1">
+			<Layout className="!p-0 flex-row min-h-0 flex shrink-0 xborder-blue-600 xborder-4 flex-1">
 				{showSideBar && <SideNavigationBar />}
-				<Content className=" overflow-y-auto flex-1">
-					Content
+				<Content className=" overflow-y-auto flex-1 bg-yellow-100 p-4">
+					{/*Content*/}
 					{children}
 				</Content>
 			</Layout>

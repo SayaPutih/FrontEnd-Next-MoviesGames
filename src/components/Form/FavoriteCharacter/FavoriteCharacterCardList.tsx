@@ -30,10 +30,8 @@ const FavoriteCharacterCardList =()=>{
 	},[])
 
 	return(
-		<div className="border-2 border-gray-900">
-			FavoriteCharacterCardList
-
-			<div className="grid grid-cols-5 gap-4 px-2">
+		<div className="X_border-2_border-gray-900_bg-third">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-2">
 				{allGames.map((a)=>{
 					return(
 						<FavoriteCharacterCard 
