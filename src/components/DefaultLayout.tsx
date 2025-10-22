@@ -1,3 +1,5 @@
+
+
 import React,{ReactElement} from "react";
 import {Layout} from "antd";
 import {usePathname} from "next/navigation";
@@ -13,7 +15,7 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 
 	const path = usePathname();
 	const withSideBar = ["/Form"];
-	const showSideBar = withSideBar.some(a=>path.startsWith(a));
+	const showSideBar = path && withSideBar.some(a=>path.startsWith(a));
 
 	return(
 		<Layout className="h-screen  overflow-y-hidden">
@@ -22,7 +24,7 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 			</Header>
 			<Layout className="!p-0 flex-row min-h-0 flex shrink-0 xborder-blue-600 xborder-4 flex-1">
 				{showSideBar && <SideNavigationBar />}
-				<Content className=" overflow-y-auto flex-1 bg-yellow-100 p-4">
+				<Content className=" overflow-y-auto flex-1 bg-yellow-100 p-4 flex flex-col justify-start items-center">
 					{/*Content*/}
 					{children}
 				</Content>

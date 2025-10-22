@@ -10,3 +10,22 @@ export async function getAllFavoriteGame() : Promise<FavoriteGameType[]>{
 	console.log(data);
 	return data;
 }
+
+export async function insertAFavoriteGame(body){
+	const formattedBody = {
+		...body,
+		rating : Number(body.rating),
+		playYear : Number(body.playYear)
+	};
+	console.log(formattedBody);
+	const res = await fetch(`${BASE_URL}/insert-new-game`,{
+		method : "POST",
+		headers : {'Content-Type' : 'application/json'},
+		body : JSON.stringify(formattedBody)
+	});
+
+	const errorText = await res.text(); // baca isi error response
+
+	if(!res.ok) throw new Error(`Something Wrong with Giving data`);
+	return errorText;
+}

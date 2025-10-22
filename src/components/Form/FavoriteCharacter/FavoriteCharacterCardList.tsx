@@ -1,6 +1,7 @@
 "use client"
 
 import React from "react";
+import {usePathname,useRouter} from "next/navigation";
 import {useState,useEffect} from "react";
 import FavoriteCharacterCard from "@/components/Card/FavoriteCharacterCard.tsx";
 import FavoriteGameDetailType from "@/types/FavoriteGameDetailType.ts";
@@ -8,6 +9,8 @@ import {getFavoriteGameFullDetails} from "@/api/FavoriteGameDetailApi.ts";
 
 const FavoriteCharacterCardList =()=>{
 
+	const router = useRouter();
+	const route = usePathname();
 	const [allGames,setAllGames] = useState<FavoriteGameDetailType[]>([]);
 
 	useEffect(()=>{
@@ -28,6 +31,8 @@ const FavoriteCharacterCardList =()=>{
 		console.log(allGames);
 
 	},[])
+
+	
 
 	return(
 		<div className="X_border-2_border-gray-900_bg-third">

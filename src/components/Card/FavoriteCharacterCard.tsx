@@ -1,6 +1,7 @@
 import React from "react";
 import FavoriteGameDetailType from "@/types/FavoriteGameDetailType";
 import { Star } from 'lucide-react';
+import {useRouter} from "next/navigation";
 
 // interface FavoriteGameDetailType : {
 // 	id : string?;
@@ -48,7 +49,9 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 })=>{
 
 	const shooter = ["FPS","Battle Royale","TPS"];
-	const RPG = ["Souls Like","Remnant","RPG","Looter Shooter"];
+	const RPG = ["Souls Like","Remnant","RPG","Looter Shooter","Pokemon"];
+
+	const router = useRouter();
 
 	const roundStar =(rating)=>{
 		return rating.toFixed(1)
@@ -58,6 +61,10 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 		if(shooter.includes(genre)) return "bg-red-700 text-orange-100";
 		if(RPG.includes(genre)) return "bg-amber-950 text-yellow-500";
 		return "bg-gray-300 text-black"
+	}
+
+	const goToEditPage =(CurId)=>{
+		router.push(`FavoriteGame/Edit/${CurId}`)
 	}
 
 	const getBarColor = (barStatus) => {
@@ -78,6 +85,7 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 		// 	{id} - {gameName} - {firstColor}*/}
 		// </div>
 		//https://placehold.co/600x400
+		//imageUrl
 
 		<div 
 			className="flex flex-col items-center justify-around bg-subsecond rounded-md h-full"
@@ -91,8 +99,12 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 				<h1 className="text-md font-bold">{gameName}</h1>
 			</div>
 
-			<div>
-				<img src="https://placehold.co/300x300" className="object-cover " />
+			<div className="border-0 border-blue-900">
+
+				<img 
+					src={imageUrl && imageUrl.trim() !== ""  ? imageUrl : "https://placehold.co/300x300"} 
+					className="object-cover w-[50vh] h-[300px] xlg:-[350px]" 
+				/>
 			</div>
 
 			<div className="w-full px-3 my-2 flex-grow flex flex-col justify-start">
@@ -139,9 +151,18 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 				className={` flex flex-row items-center justify-end w-full gap-2 px-4 py-3 rounded-b-md `}
 				style={{backgroundColor : secondColor}}
 			>
+
 				<button className="bg-green-500 px-2 rounded-md">Details</button>
-				<button className="bg-yellow-500 px-2 rounded-md">Edit</button>
+
+				<button 
+					className="bg-yellow-500 px-2 rounded-md hover:bg-yellow-700" 
+					onClick={()=>goToEditPage(id)}
+				>
+					Edit
+				</button>
+
 				<button className="bg-red-500 px-2 rounded-md">Delete</button>
+
 			</div>
 		</div>
 
