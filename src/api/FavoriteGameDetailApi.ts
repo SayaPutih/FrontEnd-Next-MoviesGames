@@ -18,7 +18,7 @@ export async function getAllFavoriteGameById(id) : Promise<FavoriteGameDetailTyp
 }
 
 export async function UpdateFavoriteGameFullDetails(id,body){
-	const res = await fetch(`https://localhost:7160/update-full-detail-by-id/${id}`,{
+	const res = await fetch(`${BASE_URL}/update-full-detail-by-id/${id}`,{
 		method : 'PUT',
 		headers : {'Content-Type' : 'application/json'},
 		body : JSON.stringify(body)

@@ -5,10 +5,8 @@ import FavoriteGameCardList from "@/components/Form/FavoriteGame/FavoriteGameCar
 
 const App =()=>{
 	return(
-		<div className = "border-4 border-yellow-900 p-0">
+		<div className = "p-0">
 			<DefaultContent />
-			<FavoriteGameCardList />
-			<FavoriteGameCardList />
 		</div>
 	)
 }
