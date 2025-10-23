@@ -4,6 +4,7 @@ import {useState,useEffect} from "react";
 import {useRouter,usePathname} from "next/navigation";
 import EvanderLayout from "@/components/DefaultLayout";
 import AButton from "@/components/AButton.tsx";
+import FavoriteMovieCardList from "@/components/Form/FavoriteMovie/FavoriteMovieCardList"
 
 const FavoriteMoviePage =()=>{
 
@@ -30,6 +31,8 @@ const FavoriteMoviePage =()=>{
 					</div>
 				</div>
 			</div>
+			<FavoriteMovieCardList />
+			<FavoriteMovieCardList />
 			<div className="h-32"></div>
 		</div>
 	)
