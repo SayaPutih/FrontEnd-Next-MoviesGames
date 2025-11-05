@@ -1,50 +1,54 @@
 "use client"
 
 import React from "react";
-import {getAllFavoriteGame} from "@/api/FavoriteGameApi.ts";
-import FavoriteGameType from "@/types/FavoriteGameType.ts";
-import FavoriteGameCard from "@/components/Card/FavoriteGameCard.tsx";
+import {usePathname,useRouter} from "next/navigation";
 import {useState,useEffect} from "react";
+import FavoriteGameCard from "@/components/Card/FavoriteGameCard.tsx";
+import FavoriteGameDetailType from "@/types/FavoriteGameDetailType.ts";
+import {getFavoriteGameFullDetails} from "@/api/FavoriteGameDetailApi.ts";
 
-const FavoriteGameCardList =()=>{
+const FavoriteGameList =()=>{
 
-	const [allFavoriteGame,setAllFavoriteGame] = useState<FavoriteGameType[]>([]);
+	const router = useRouter();
+	const route = usePathname();
+	const [allGames,setAllGames] = useState<FavoriteGameDetailType[]>([]);
 
 	useEffect(()=>{
 
-		const fetchData =async ()=>{
+		const getApi = async ()=>{
 			try{
-				const data = await getAllFavoriteGame();
-				setAllFavoriteGame(data);
-				console.log(allFavoriteGame);
+				const res = await getFavoriteGameFullDetails();
+				console.log(res);
+				setAllGames(res);
 			}catch(err){
-				console.error(`Error Fetching : ${err}`);
-			}
+				console.log(err);
+			}	
 		}
 
-		fetchData();
+		getApi();
+		
+		console.log(`Showing All games : `);
+		console.log(allGames);
 
 	},[])
 
+	
+
 	return(
-		<div className="min-h-screen mb-10 border-yellow-600 border-2 flex flex-col items-center justify-center">
-			List
-			<div className="grid grid-cols-5 w-full p-4 gap-4">
-				{allFavoriteGame.map((a,i)=>{
+		<div className="X_border-2_border-gray-900_bg-third">
+			<div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 px-2">
+				{allGames.map((a)=>{
 					return(
-						<div key={a.id}>
-							{i === 5 ? <FavoriteGameCard gameName={a.gameName} imageUrl="https://placehold.co/600x600" playYear={a.playYear} /> : <FavoriteGameCard {...a}/> }
-						</div>
-				)})}
+						<FavoriteGameCard 
+							key = {a.id}
+							{...a}
+						/>
+					)
+				})}
 			</div>
+
 		</div>
 	)
 }
 
-
-// 			Dibagi Jadi 3
-// 			Easy
-// 			Medium
-// 			Hard
-
-export default FavoriteGameCardList;
+export default FavoriteGameList;

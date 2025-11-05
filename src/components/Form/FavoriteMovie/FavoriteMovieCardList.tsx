@@ -35,9 +35,11 @@ const FavoriteMovieCardList =()=>{
 		<div className="grid grid-cols-4 border-2 border-red-900 w-full gap-2 p-2">
 			{allFavoriteMovie.map((a)=>{return(
 					<FavoriteMovieCard
-							movieName={a.movieName}
-							genre={a.genre}
-							description={a.description}
+						key = {a.id}
+							{...a}
+							// movieName={a.movieName}
+							// genre={a.genre}
+							// description={a.description}
 						/>
 				)})}
 		</div>

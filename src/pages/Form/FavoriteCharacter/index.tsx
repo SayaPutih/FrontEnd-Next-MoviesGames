@@ -1,40 +1,23 @@
 "use client"
 
 import React from "react";
-import EvanderLayout from "@/components/DefaultLayout.tsx";
-import {getAllFavoriteGame} from "@/api/FavoriteCharacterApi.ts";
 import {useEffect,useState} from "react";
-import FavoriteCharacter from "@/types/FavoriteCharacterType.ts";
+import EvanderLayout from "@/components/DefaultLayout.tsx";
+import FavoriteCharacterCardList from "@/components/Form/FavoriteCharacter/FavoriteCharacterCardList.tsx";
 
 const FavoriteCharacterPage =()=>{
-
-	const [allChar,setAllChar] = useState<FavoriteCharacter[]>([]);
-
-	useEffect(()=>{
-		const getData =async ()=>{
-				try{
-
-				const res = await getAllFavoriteGame();
-				console.log(res.status);
-				//if(!res.ok) throw new Error("Bad Fetching from Page master Evan");
-				console.log(res.total);
-				console.log(res.result);
-				setAllChar(res.result);
-			}catch(err){
-				console.error(err);
-			}
-		}
-
-		getData();
-	},[])
-
+	
 	return(
-		<div>
+		<div className="w-full flex flex-col">
 			<div>
-				FavoriteCharacterPage
+				<h1 className="text-first font-bold text-2xl mb-4">Favorite Character Page</h1>
+			</div>
+			
+			<div>
+				<FavoriteCharacterCardList />
 			</div>
 
-			<div className="grid grid-cols-3">
+			{/*<div className="grid grid-cols-3">
 				{allChar.map((a)=>{return(
 						<div key={a.id} className="flex flex-col gap-0">
 							<h1>{a.characterName}</h1>
@@ -48,7 +31,7 @@ const FavoriteCharacterPage =()=>{
 							<h1>{a.roleInUniverse}</h1>
 						</div>
 					)})}
-			</div>
+			</div>*/}
 		</div>
 	)
 }

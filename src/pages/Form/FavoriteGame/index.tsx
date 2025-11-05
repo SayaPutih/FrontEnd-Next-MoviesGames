@@ -3,7 +3,7 @@ import React from "react";
 import AButton from "@/components/AButton.tsx";
 import EvanderLayout from "@/components/DefaultLayout.tsx";
 import {useRouter,usePathname} from "next/navigation";
-import FavoriteCharacterCardList from "@/components/Form/FavoriteCharacter/FavoriteCharacterCardList";
+import FavoriteGameCardList from "@/components/Form/FavoriteGame/FavoriteGameCardList";
 
 const FavoriteGame =()=>{
 
@@ -30,7 +30,7 @@ const FavoriteGame =()=>{
 					</div>
 				</div>
 			</div>
-			<FavoriteCharacterCardList />
+			<FavoriteGameCardList />
 			<div className="h-32"></div>
 		</div>
 	)
