@@ -4,20 +4,43 @@ import React from "react";
 import {useEffect,useState} from "react";
 import EvanderLayout from "@/components/DefaultLayout.tsx";
 import FavoriteCharacterCardList from "@/components/Form/FavoriteCharacter/FavoriteCharacterCardList.tsx";
+import AButton from "@/components/AButton.tsx";
+import {useRouter} from "next/navigation";
 
 const FavoriteCharacterPage =()=>{
 	
+	const router = useRouter();
+
+	const goToInsert =()=>{
+		router.push("./Input");
+	}
+
 	return(
-		<div className="w-full flex flex-col">
-			<div>
-				<h1 className="text-first font-bold text-2xl mb-4">Favorite Character Page</h1>
+		<div className="w-full flex flex-col ">
+			<div className="w-full flex flex-col items-center justify-between xborder-2 xborder-red-900">
+				
+				<h1 className="self-start text-first font-bold text-2xl mb-4">Favorite Character Page</h1>
+				
+				<div className="self-end w-full flex flex-row xborder-2 items-center justify-between">
+					<div className="flex flex-row gap-2 w-1/3 mb-2 bg-black p-2 rounded-md">
+						<div className="w-16 h-16 bg-first rounded-md"></div>
+						<div className="w-16 h-16 bg-second rounded-md"></div>
+						<div className="w-16 h-16 bg-third rounded-md"></div>
+						<div className="w-16 h-16 bg-subfirst rounded-md"></div>
+						<div className="w-16 h-16 bg-subsecond rounded-md"></div>
+					</div>
+					<div className="items-center justify-center w-1/4">
+						<AButton label="Insert Character" onClick={()=>goToInsert()} />
+					</div>
+				</div>
+
 			</div>
 			
 			<div>
 				<FavoriteCharacterCardList />
 			</div>
 
-			{/*<div className="grid grid-cols-3">
+			{/*<div className="grid grid-cols-3">n
 				{allChar.map((a)=>{return(
 						<div key={a.id} className="flex flex-col gap-0">
 							<h1>{a.characterName}</h1>

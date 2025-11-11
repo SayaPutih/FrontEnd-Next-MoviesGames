@@ -2,19 +2,22 @@
 
 import React,{useEffect,useState} from "react";
 import FavoriteCharacterCard from "@/components/Card/FavoriteCharacterCard.tsx";
-import {getAllFavoriteGame} from "@/api/FavoriteCharacterApi.ts";
+import {getAllFavoriteGame,getCharacterWithFullDetails} from "@/api/FavoriteCharacterApi.ts";
 import FavoriteCharacter from "@/types/FavoriteCharacterType.ts";
+import FavoriteCharacterType from "@/types/FavoriteCharacterDetailType.ts";
 
 const FavoriteCharacterCardList =()=>{
 
-	const [allChar,setAllChar] = useState<FavoriteCharacter[]>([]);
+	const [allChar,setAllChar] = useState<FavoriteCharacterType[]>([]);
 
 	useEffect(()=>{
 		const getData =async ()=>{
 				try{
 
-				const res = await getAllFavoriteGame();
-				// console.log(res.status);
+				const res = await getCharacterWithFullDetails();
+				console.log("------ Favorite Character -----");
+				//console.log(res.status);
+				console.log(res);
 				// //if(!res.ok) throw new Error("Bad Fetching from Page master Evan");
 				// console.log(res.total);
 				//console.log(res.result);
@@ -32,7 +35,7 @@ const FavoriteCharacterCardList =()=>{
 
 
 	return(
-		<div className="grid grid-cols-3 gap-2">
+		<div className="grid grid-cols-3 lg:grid-cols-5 gap-2">
 			{allChar.map((a)=>{
 				return(
 					<FavoriteCharacterCard 

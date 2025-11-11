@@ -42,7 +42,7 @@ const FavoriteMovieCard =({
 	return(
 		<div
 				style={{backgroundColor : thirdColor}} 
-				className="border-red-400 xborder-2 h-[365] bg-gray-400 flex flex-col items-center justify-between overflow-hidden rounded-xl shadow-xl transition-all hover:scale-105 relative"
+				className="border-red-400 xborder-2 h-[365] bg-gray-400 flex flex-col items-center justify-between overflow-hidden hover:shadow-2xl rounded-xl shadow-xl transition-all hover:z-10 z-0 hover:scale-[1.11] relative"
 			>
 			
 			{/*<img 
@@ -72,6 +72,7 @@ const FavoriteMovieCard =({
 			</div>*/}
 			<div className="absolute top-0 w-full z-0 h-2/6" style={{backgroundColor : firstColor}}></div>
 			<div className="absolute bottom-0 z-0 w-full  xh-1/6" style={{backgroundColor : secondColor}} ></div>
+			<div className="absolute bottom-0 z-0 w-full  xh-1/6" style={{backgroundColor : secondColor}} ></div>
 
 			<div className="xborder-2 border-yellow-900 w-full h-4/6 relative">
 				
@@ -98,10 +99,10 @@ const FavoriteMovieCard =({
 
 				<div className="border-[0.1rem] w-full border-gray-900"></div>
 				
-				<div className="flex flex-row items-center justify-between w-full h-full my-2">
+				<div className="flex flex-row items-center justify-between w-full h-full my-1">
 					<div className="p-2 w-2/3 h-full ">
-						<h1 className="font-semibold text-xs xtext-first">{description ? description : "None"}</h1>
-						<h1 className="font-normal text-xs xtext-first">{desc ? desc : "None"}</h1>
+						<h1 className="font-semibold text-[10px] xtext-first">{description ? description : "None"}</h1>
+						<h1 className="font-normal text-[9px] xtext-first">{desc ? desc : "None"}</h1>
 					</div>
 					<div className={`${getColorRating(rating)} p-2 xbg-green-600 w-full h-full flex items-center justify-center h-full w-full w-1/3 rounded-md`}>
 						<h1 className="font-semibold text-2xl  xtext-subfirst">{getRating(rating)}</h1>

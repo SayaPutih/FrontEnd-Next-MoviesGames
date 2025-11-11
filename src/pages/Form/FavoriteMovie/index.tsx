@@ -35,6 +35,7 @@ const FavoriteMoviePage =()=>{
 				</div>
 			</div>
 			<FavoriteMovieCardList />
+			
 			<div className="h-32"></div>
 		</div>
 	)
