@@ -72,7 +72,7 @@ const FavoriteGameCard =({
 			
 			<div className="flex flex-col item-center justify-center w-full relative p-1">
 
-				<div className="flex flex-col item-start justify-start xborder-2 z-0 p-2 relative">
+				<div className="flex flex-col item-start justify-start xborder-2 z-0 py-2 relative">
 					
 					<div 
 						className={`w-10 h-10 border-2 absolute left-1/2  rounded-full top-1 -translate-x-1/2 ${getScoreColor(rating)} z-1 flex flex-row items-center justify-center`}
@@ -80,7 +80,7 @@ const FavoriteGameCard =({
 						<span className={` text-md text-center flex items-center justify-center flex-col px-2 h-[30] py-1 font-bold rounded-2xl `} >{getScore(rating)}</span>
 					</div>
 
-					<h1 className="grid-grid-cols-3-gap-7 flex items-center justify-between w-full p-2 z-5 ">
+					<h1 className="xborder-2 gap-20 grid grid-cols-2  justify-between w-full p-[0.5] z-5  flex items-start justify-around">
 						<span className="font-bold text-center">{type ? type : "Nothing"}</span> 
 						<span className={`font-bold text-center`} >{roleInUniverse ? roleInUniverse :  "Nothing"}</span>
 					</h1>

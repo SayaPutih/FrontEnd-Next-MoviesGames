@@ -5,14 +5,15 @@ import {useEffect,useState} from "react";
 import EvanderLayout from "@/components/DefaultLayout.tsx";
 import FavoriteCharacterCardList from "@/components/Form/FavoriteCharacter/FavoriteCharacterCardList.tsx";
 import AButton from "@/components/AButton.tsx";
-import {useRouter} from "next/navigation";
+import {useRouter,usePathname} from "next/navigation";
 
 const FavoriteCharacterPage =()=>{
 	
 	const router = useRouter();
+	const route = usePathname();
 
 	const goToInsert =()=>{
-		router.push("./Input");
+		router.push(`${route}/Input`);
 	}
 
 	return(
