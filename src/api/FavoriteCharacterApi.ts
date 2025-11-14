@@ -15,3 +15,10 @@ export async function getCharacterWithFullDetails() : Promise<FavoriteCharacterD
 	const data = await res.json();
 	return data.value;
 }
+
+
+export async function getCharacterWithFullDetailsById(id) : Promise<FavoriteCharacterDetailType>{
+	const res = await fetch(`https://localhost:7160/api/v1/FavoriteDetail/Get-Character-by-id${id}`);
+	const data = await res.json();
+	return data.value;
+}

@@ -13,7 +13,7 @@ const FavoriteCharacterPage =()=>{
 	const route = usePathname();
 
 	const goToInsert =()=>{
-		router.push(`${route}/Input`);
+		router.push(`${route}/Upsert/0`);
 	}
 
 	return(

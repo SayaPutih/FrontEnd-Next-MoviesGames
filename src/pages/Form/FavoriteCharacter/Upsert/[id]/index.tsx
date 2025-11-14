@@ -5,7 +5,9 @@ import {useRouter} from "next/navigation";
 import {getAllMbti} from "@/api/MbtiApi.ts";
 import {getAllFavoriteGame} from "@/api/FavoriteGameApi.ts";
 import {upsertAFavoriteCharacter} from "@/api/FavoriteCharacterDetailApi.ts";
+import {getCharacterWithFullDetailsById} from "@/api/FavoriteCharacterApi.ts";
 import AButton from "@/components/AButton.tsx";
+import {useParams} from "next/navigation";
 
 type FavoriteCharacterInsert = {
 	gameId : string,
@@ -25,7 +27,11 @@ type FavoriteCharacterInsert = {
 const InputCharacterPage =(
 	)=>{
 
+	const params = useParams();
 	const router = useRouter();
+	const id = params?.id;
+	
+	const[editMode , setEditMode] = useState(false);
 
 	const[mbtiList , setMbtiList] = useState([]);
 	const[gameList , setGameList] = useState([]);
@@ -44,7 +50,7 @@ const InputCharacterPage =(
 	const[description , setDescription ] = useState("");
 
 	const submitForm =async ()=>{
-		const id = "DBA6984F-4716-4239-BC23-31E8AEEF806B";
+		//const id = "DBA6984F-4716-4239-BC23-31E8AEEF806B";
 		const submitData : FavoriteCharacterInsert ={
 				gameId,
 				mbtiId,
@@ -61,6 +67,7 @@ const InputCharacterPage =(
 			}
 
 		console.log("--Submiting--");
+		console.log(submitData);
 		console.log({
 		  gameId,
 		  mbtiId,
@@ -75,6 +82,7 @@ const InputCharacterPage =(
 		  thirdColor,
 		  description
 		});
+
 		const submit = await upsertAFavoriteCharacter(id,submitData);
 
 		if(!submit){
@@ -84,10 +92,39 @@ const InputCharacterPage =(
 		}
 	}
 
+	const isGuid = (value: string) => {
+	  const guidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
+	  return guidRegex.test(value);
+	};
+
 	useEffect(()=>{
+
+		setEditMode(isGuid(id))
+		// if(isGuid(id)){
+		// 	setEditMode(false);
+		// }else{
+		// 	setEditMode(true);
+		// }
 
 		const getData =async ()=>{
 			try{
+
+				if(editMode){
+					const res3 = await getCharacterWithFullDetailsById(id);
+
+					setGameId(res3.gameId)
+					setMbtiId(res3.mbtIid)
+					setCharacterName(res3.name)
+					setBestSkillName(res3.skill)
+					setRating(res3.rating)
+					setType(res3.type)
+					setWeapon(res3.weapon)
+					setRoleInUniverse(res3.standing)
+					setFirstColor(res3.firstColor)
+					setSecondColor(res3.secondColor)
+					setThirdColor(res3.thirdColor)
+					setDescription(res3.description)
+				}
 
 				const res1 = await getAllMbti();
 				const res2 = await getAllFavoriteGame();
@@ -103,8 +140,11 @@ const InputCharacterPage =(
 		getData()
 		console.log(mbtiList);
 		console.log(gameList);
-
-	},[])
+		console.log("______________________________________________");
+		console.log(id);
+		console.log(editMode);
+		console.log(isGuid(id))
+	},[])	
 
 	return(
 		<div className="x w-full p-2 grid grid-cols-6 flex flex-col items-center justify-center bg-third rounded-md mb-20 text-second font-bold text-md">
@@ -282,7 +322,11 @@ const InputCharacterPage =(
 			</div>
 
 			<div className="col-start-5 col-span-2 p-3">
-				<AButton label="Submit" onClick={()=>submitForm()}/>
+				{editMode ??
+					<AButton label="Submit" onClick={()=>submitForm()}/>
+				} : {
+					<AButton label="Edit" onClick={()=>submitForm()}/>
+				}
 			</div>
 		</div>
 		)
@@ -291,3 +335,27 @@ const InputCharacterPage =(
 
 InputCharacterPage.layout = EvanderLayout;
 export default InputCharacterPage;
+
+/*
+
+{
+	gameId": '37f91681-34d9-4a33-b17a-7c10ee3204b1', "
+	mbtiId": 'b8ac38f2-b4a8-40f9-b7a3-02015ea016bd', "
+	characterName": 'DoctorStrangeReal', "
+	bestSkillName": 'string', "
+	rating": 10,"
+	bestSkillName": "string","
+	characterName": "DoctorStrangeReal","
+	description": "Blue Man","
+	firstColor": "#1c69e6","
+	gameId": "37f91681-34d9-4a33-b17a-7c10ee3204b1","
+	mbtiId": "b8ac38f2-b4a8-40f9-b7a3-02015ea016bd","
+	rating": 10,"
+	roleInUniverse": "string","
+	secondColor": "#ffed69","
+	thirdColor": "#7c97c2","
+	type": "string","
+	weapon ": "AAA","
+}
+
+*/

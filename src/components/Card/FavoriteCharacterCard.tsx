@@ -95,8 +95,16 @@ const FavoriteGameCard =({
 					/>
 				</div>*/}
 
-				<div className="object-coverx absolute top-[0.025] left-1/2 xshadow-xl w-full flex flex-row items-center justify-center -translate-x-1/2 xborder-2 z-10 ">
-					<img src={"https://img.pokemondb.net/sprites/scarlet-violet/normal/giratina-altered.png"} className=" h-[200] ratio-1  object-cover xshadow-xl xborder-2 "/>
+				<div className="border-2 object-coverx absolute top-[140px] -translate-y-1/2 left-1/2 xshadow-xl w-full flex flex-row items-center justify-center -translate-x-1/2 xborder-2 z-10 ">
+					{/*<img 
+						src={"https://img.pokemondb.net/sprites/scarlet-violet/normal/giratina-altered.png"} 
+						className=" h-[200] ratio-1  object-cover xshadow-xl xborder-2 "
+					/>*/}
+					<img 
+						src={imageUrl ? `https://localhost:7160/api/v1/files/get-file-WithExtention?fileName=${imageUrl}` : "https://img.pokemondb.net/sprites/scarlet-violet/normal/giratina-altered.png"} 
+						className="border-2 h-[150] max-w-[150] max-h-[150] ratio-1  object-cover xshadow-xl xborder-2 "
+					/>
+					{/*https://localhost:7160/api/v1/files/get-file-WithExtention?fileName=Bob.png*/}
 				</div>
 
 			</div>
@@ -109,9 +117,9 @@ const FavoriteGameCard =({
 				<div className="py-2  flex flex-col p-0 h-1/3">
 					<h1 
 						className={`text-center font-bold`}
-						style = {{backgroundColor : thirdColor ? `${thirdColor}` : "Yellow"}}
+						style = {{backgroundColor : thirdColor ? `${thirdColor}` : "Yellow",color : secondColor ? `` : "Red"}}
 					>
-						<span>{name ? name : "Nothing"}</span>
+						<span>{name ? name : "Nothing"} </span>
 					</h1>
 
 					<h1 className="w-full xborder-2 mt-2 flex flex-row text-xs item-center justify-around h-[40] ">
