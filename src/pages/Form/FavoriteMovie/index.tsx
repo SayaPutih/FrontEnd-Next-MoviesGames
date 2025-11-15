@@ -11,7 +11,7 @@ const FavoriteMoviePage =()=>{
 	const router = useRouter();
 	const path = usePathname();
 	const goToInsertPage =()=>{
-		router.push(`${path}/Input`);
+		router.push(`${path}/Upsert/${0}`);
 	}
 
 	return(

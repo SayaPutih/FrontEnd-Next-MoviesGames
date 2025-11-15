@@ -6,12 +6,12 @@ type FavoriteMovieDetail = {
 	genre : string,
 	imageUrl : string,
 	playYear : number,
-	desc : string?,
-	watchYear : string?,
-	firstColor : string?,
-	secondColor : string?,
-	thirdColor : string?,
-	description : string?,
+	desc : string,
+	watchYear : number,
+	firstColor : string,
+	secondColor : string,
+	thirdColor : string,
+	description : string,
 }
 
 export default FavoriteMovieDetail;
