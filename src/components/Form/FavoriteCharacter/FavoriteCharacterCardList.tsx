@@ -65,7 +65,7 @@ const FavoriteCharacterCardList =()=>{
 				</button> */}
 			</div>
 
-			<div className="grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 gap-2 ">
+			<div className="grid sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-4 xl:grid-cols-5 gap-2 mb-20">
 				
 				{allChar.map((a)=>{
 					return(
@@ -83,7 +83,7 @@ const FavoriteCharacterCardList =()=>{
 							}
 
 							<FavoriteCharacterCard 
-								className="z-0"
+								className="z-0 "
 								key = {a.id}
 								{...a}
 							/>

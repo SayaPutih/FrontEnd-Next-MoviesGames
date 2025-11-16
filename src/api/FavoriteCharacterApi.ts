@@ -18,7 +18,10 @@ export async function getCharacterWithFullDetails() : Promise<FavoriteCharacterD
 
 
 export async function getCharacterWithFullDetailsById(id) : Promise<FavoriteCharacterDetailType>{
-	const res = await fetch(`https://localhost:7160/api/v1/FavoriteDetail/Get-Character-by-id${id}`);
+	const res = await fetch(`https://localhost:7160/api/v1/FavoriteDetail/Get-Character-by-id/${id}`);
 	const data = await res.json();
+	console.log("------------------------------------");
+	console.log("From API")
+	console.log(data.value);
 	return data.value;
 }

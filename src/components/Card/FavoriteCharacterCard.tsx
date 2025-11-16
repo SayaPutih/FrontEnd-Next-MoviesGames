@@ -27,7 +27,7 @@ const FavoriteGameCard =({
 	const getScoreColor =(rating)=>{
 		if(rating > 9){
 			return "text-green-900 bg-green-500 border-green-500"
-		}else if(rating > 8){
+		}else if(rating > 7.8){
 			return "text-green-700 bg-green-300 border-green-300"
 		}else if(rating > 7){
 			return "text-yellow-900 bg-yellow-500 border-yellow-500"
@@ -52,7 +52,7 @@ const FavoriteGameCard =({
 	return(
 
 		<div 
-			className={`xborder-0 xborder-gray-100 xbg-black/90 xtext-yellow-700 xp-1 rounded-xl font-semibold flex flex-col items-start justify-between shadow-xl p-0 h-[310]`}
+			className={`xborder-0 xborder-gray-100 xbg-black/90 xtext-yellow-700 xp-1 rounded-xl md:text-xsxlg:text- font-semibold flex flex-col items-start justify-between shadow-xl p-0 h-[310]`}
 			style = {{backgroundColor : firstColor ?? "white" , color : secondColor ?? "black"}}
 		>
 

@@ -70,10 +70,24 @@ const UpsertAFavoriteMoviePage =()=>{
 
         console.log("----------------------------");
         console.log(submitData);
+
         const res = await upsertAFavoriteMovie(
-            "623fe1f8-aa7f-439d-8e12-104750fd9647"
-            ,submitData
-        );
+                isGuid(id) ? id :  "623fe1f8-aa7f-439d-8e12-104750fd9647"
+                ,submitData
+            );
+        
+        // if(isGuid(id)){
+        //     const res = await upsertAFavoriteMovie(
+        //         isGuid(id) ? id :  "623fe1f8-aa7f-439d-8e12-104750fd9647"
+        //         ,submitData
+        //     );
+        // }else{
+        //     const res = await upsertAFavoriteMovie(
+        //         "623fe1f8-aa7f-439d-8e12-104750fd9647"
+        //         ,submitData
+        //     );
+        // }
+        
 
         if(res){
             return router.push("/Form/FavoriteMovie");
@@ -88,12 +102,12 @@ const UpsertAFavoriteMoviePage =()=>{
 
         const getApi =async ()=>{
             try{
-
+                setEditMode(isGuid(id))
                 const resCompany = await getCompanyByApi();
                 console.log(resCompany);
                 setListOfCompany(resCompany);
 
-                if(editMode){
+                if(isGuid(id)){
                     const res = await getFavoriteMovieById(id);
                     setMovieName(res.movieName); //v
                     setRating(res.rating); //v
@@ -102,9 +116,9 @@ const UpsertAFavoriteMoviePage =()=>{
                     setPlayYear(res.playYear); //v
                     setDesc(res.desc); //v
                     setWatchYear(res.watchYear); //v
-                    setFirstColor(res.firstColor);
-                    setSecondColor(res.secondColor);
-                    setThirdColor(res.thirdColor);
+                    setFirstColor(res.firstColor  || "#000000" );
+                    setSecondColor(res.secondColor  || "#000000");
+                    setThirdColor(res.thirdColor  || "#000000");
                     setDescription(res.description); //v
                 }
 
@@ -112,8 +126,12 @@ const UpsertAFavoriteMoviePage =()=>{
                 console.log("Failed fetching API on page : " + err);
             }
         }
-
+        setEditMode(isGuid(id))
         getApi();
+        console.log("---------------------------");
+        console.log("ID : " + id);
+        console.log("IsGuid : " + isGuid(id));
+        console.log("editMode : " + editMode);
 
     },[])
 
@@ -193,22 +211,22 @@ const UpsertAFavoriteMoviePage =()=>{
             </div> 
 
             <div className="xborder-2 flex flex-col p-2 col-span-2">
-                <label htmlFor="playYear" className="text-second font-bold text-md mb-1" >Watch Year</label>
+                <label htmlFor="playYear" className="text-second font-bold text-md mb-1" >Play Year</label>
                 <input 
                     className="bg-gray-900 font-semibold text-subfirst rounded-md p-1 text-md"
                     id="playYear"
-                    type="text"
+                    type="number"
                     value={playYear}
                     onChange={(a)=>setPlayYear(Number(a.target.value))}
                 />
             </div> 
 
             <div className="xborder-2 flex flex-col p-2 col-span-2">
-                <label htmlFor="watchYear" className="text-second font-bold text-md mb-1" >Play Year</label>
+                <label htmlFor="watchYear" className="text-second font-bold text-md mb-1" >Watch Year</label>
                 <input 
                     className="bg-gray-900 font-semibold text-subfirst rounded-md p-1 text-md"
                     id="watchYear"
-                    type="text"
+                    type="number"
                     value={watchYear}
                     onChange={(a)=>setWatchYear(Number(a.target.value))}
                 />
@@ -219,7 +237,7 @@ const UpsertAFavoriteMoviePage =()=>{
                 <input 
                     className="bg-gray-900 font-semibold text-subfirst rounded-md p-1 text-md"
                     id="rating"
-                    type="text"
+                    type="number"
                     value={rating}
                     onChange={(a)=>setRating(Number(a.target.value))}
                 />
@@ -287,5 +305,36 @@ export default UpsertAFavoriteMoviePage;
     "secondColor": "#0033ff",
     "thirdColor": "#44ff00",
     "watchYear": 2019
+}
+
+0f49a345-e41d-4da2-bc3f-7e96f61c92d1
+{
+    "companyId": "77127062-0447-49c0-90c1-32f91ec51f8a",
+    "movieName": "Doctor Doom",
+    "rating": 9.8,
+    "creatorName": "Evander",
+    "genre": "Test",
+    "playYear": 2021,
+    "desc": "A",
+    "watchYear": null,
+    "firstColor": null,
+    "secondColor": null,
+    "thirdColor": null,
+    "description": "A"
+}
+
+{
+    "companyId": "77127062-0447-49c0-90c1-32f91ec51f8a",
+    "movieName": "Doctor Doom",
+    "rating": 9.8,
+    "creatorName": "Evander",
+    "genre": "Test",
+    "playYear": 2021,
+    "desc": "A",
+    "watchYear": 0,
+    "firstColor": "#ffffff",
+    "secondColor": "#ffffff",
+    "thirdColor": "#ffffff",
+    "description": "A"
 }
 */

@@ -1,6 +1,8 @@
 "use client"
 import React,{useState,useEffect} from "react";
 import FavoriteMovieDetail from "@/types/FavoriteMovieDetailType";
+import { Pencil,Trash } from 'lucide-react';
+import {useRouter} from "next/navigation";
 
 const FavoriteMovieCard =({
 	id,
@@ -18,10 +20,17 @@ const FavoriteMovieCard =({
 	description,
 }:FavoriteMovieDetail)=>{
 
+	const router = useRouter();
+	
 	useEffect(()=>{
 		console.log("In The Card");
 		console.log(creatorName);
 	},[])
+
+	const toEditPage =()=>{
+		
+		router.push(`/Form/FavoriteMovie/Upsert/${id}`)
+	}
 
 	const getRating =(rate)=>{
 		return rate * 10
@@ -40,9 +49,13 @@ const FavoriteMovieCard =({
 	}
 
 	return(
+		<div className="relative hover:scale-[1.01] group">
+		<div className="rounded-full bg-third z-10 p-2 -right-[10] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
+			<Pencil className=" " onClick={()=>toEditPage()}/>
+		</div>
 		<div
 				style={{backgroundColor : thirdColor}} 
-				className="border-red-400 xborder-2 h-[365] bg-gray-400 flex flex-col items-center justify-between overflow-hidden hover:shadow-2xl rounded-xl shadow-xl transition-all hover:z-10 z-0 hover:scale-[1.11] relative"
+				className="border-red-400 xborder-2 h-[365] bg-gray-400 flex flex-col items-center justify-between overflow-hidden hover:shadow-2xl rounded-xl shadow-xl transition-all xhover:z-10 z-0  relative"
 			>
 			
 			{/*<img 
@@ -112,6 +125,7 @@ const FavoriteMovieCard =({
 				<div className="border-2 border-green-800 "></div>
 			</div>
 
+		</div>
 		</div>
 	)
 }

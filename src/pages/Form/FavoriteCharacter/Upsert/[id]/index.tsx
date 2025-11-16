@@ -50,7 +50,7 @@ const InputCharacterPage =(
 	const[description , setDescription ] = useState("");
 
 	const submitForm =async ()=>{
-		//const id = "DBA6984F-4716-4239-BC23-31E8AEEF806B";
+
 		const submitData : FavoriteCharacterInsert ={
 				gameId,
 				mbtiId,
@@ -83,7 +83,10 @@ const InputCharacterPage =(
 		  description
 		});
 
-		const submit = await upsertAFavoriteCharacter(id,submitData);
+		const submit = await upsertAFavoriteCharacter(
+			isGuid(id)? id :  "DBA6984F-4716-4239-BC23-31E8AEEF806B",
+			submitData
+			);
 
 		if(!submit){
 			alert("Somthing Wrong with Posting the Data");
@@ -100,16 +103,11 @@ const InputCharacterPage =(
 	useEffect(()=>{
 
 		setEditMode(isGuid(id))
-		// if(isGuid(id)){
-		// 	setEditMode(false);
-		// }else{
-		// 	setEditMode(true);
-		// }
 
 		const getData =async ()=>{
 			try{
 
-				if(editMode){
+				if(isGuid(id)){
 					const res3 = await getCharacterWithFullDetailsById(id);
 
 					setGameId(res3.gameId)
@@ -141,9 +139,10 @@ const InputCharacterPage =(
 		console.log(mbtiList);
 		console.log(gameList);
 		console.log("______________________________________________");
-		console.log(id);
-		console.log(editMode);
-		console.log(isGuid(id))
+		console.log("Id : " + id);
+		console.log("Char Name : " + characterName);
+		console.log("Edit Mode : " + editMode);
+		console.log("Is Guid : " + isGuid(id))
 	},[])	
 
 	return(
@@ -322,9 +321,9 @@ const InputCharacterPage =(
 			</div>
 
 			<div className="col-start-5 col-span-2 p-3">
-				{editMode ??
+				{!editMode ?
 					<AButton label="Submit" onClick={()=>submitForm()}/>
-				} : {
+				: 
 					<AButton label="Edit" onClick={()=>submitForm()}/>
 				}
 			</div>
@@ -356,6 +355,39 @@ export default InputCharacterPage;
 	thirdColor": "#7c97c2","
 	type": "string","
 	weapon ": "AAA","
+}
+
+
+f10746dd-f2a6-4d8a-ab6c-fbedbd7adc04
+{
+    "gameId": "623fe1f8-aa7f-439d-8e12-104750fd9647",
+    "mbtiId": "b8ac38f2-b4a8-40f9-b7a3-02015ea016bd",
+    "characterName": "Ash Ketchum",
+    "bestSkillName": "Ash Ketchum",
+    "rating": 4,
+    "type": "Ash Ketchum",
+    "weapon": "Ash Ketchum",
+    "roleInUniverse": "Ash Ketchum",
+    "firstColor": "#0b50da",
+    "secondColor": "#cc0f0f",
+    "thirdColor": "#2840f0",
+    "description": "Ash Ketchum"
+}
+
+0
+{
+    "gameId": "cb0f08f5-029c-4346-9719-24cc747822be",
+    "mbtiId": "",
+    "characterName": "Sova",
+    "bestSkillName": "Recon Dart",
+    "rating": 8,
+    "type": "Human",
+    "weapon": "Odin",
+    "roleInUniverse": "Agent",
+    "firstColor": "#f5f4ed",
+    "secondColor": "#38b3dd",
+    "thirdColor": "#263ca1",
+    "description": "Agent from Valorant my Favorite Agent because it has wallbang potential"
 }
 
 */
