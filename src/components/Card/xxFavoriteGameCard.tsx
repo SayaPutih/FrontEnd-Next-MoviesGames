@@ -99,36 +99,36 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 		>
 			
 			<div 
-				className="bg-third w-full text-center rounded-t-md text-md py-2 items-center"
+				className="bg-third w-full text-center rounded-t-md text-xs py-1 items-center"
 				style={{backgroundColor : firstColor , color : secondColor}}
 			>
-				<h1 className="text-md font-bold">{gameName}</h1>
+				<h1 className="text-xs font-bold">{gameName}</h1>
 			</div>
 
 			<div className="border-0 border-blue-900">
 
 				<img 
 					src={imageUrl && imageUrl.trim() !== ""  ? imageUrl : "https://placehold.co/300x300"} 
-					className="object-cover w-[50vh] h-[300px] xlg:-[350px]" 
+					className="object-cover h-[200px]  " 
 				/>
 			</div>
 
-			<div className="w-full px-3 my-2 flex-grow flex flex-col justify-start">
-				<p className=" flex flex-row items-center justify-between">
+			<div className="w-full px-1 my-1 flex-grow flex flex-col justify-start">
+				{/* <p className=" flex flex-row items-center justify-between">
 					<span className="flex flex-row gap-1">
-						<span className={`font-semibold rounded-md px-3 ${getColorThemeByGenre(genre)}`}>{genre}</span>
+						<span className={`font-semibold rounded-md px-2 ${getColorThemeByGenre(genre)}`}>{genre}</span>
 						<span className="bg-yellow-400  rounded-md px-2">{playYear}</span>
 					</span>
 					<span className="text-black font-bold flex items-center gap-1 ">{roundStar(rating)}<Star className="text-yellow-600" width={15}/></span>
-				</p>
-				<p className="font-semibold  mt-2">{desc ? trimParagraph(desc) : "Nothing"}</p>
+				</p> */}
+				{/* <p className="font-semibold  mt-2">{desc ? trimParagraph(desc) : "Nothing"}</p> */}
 
 			</div>
 
 			{RPG.includes(genre) ?(
-				<div className="flex flex-col w-full font-bold mb-4 px-3">
+				<div className="flex flex-col w-full font-bold mb-2 px-2 text-[12px]">
 					<p>Completion :  <span className="font-normal text-red-900">{completion}</span></p>
-					<h1>Normal : <span className="font-normal">{rank}</span></h1>
+					{/* <h1>Normal : <span className="font-normal">{rank}</span></h1>
 
 					<div className=" bg-gray-500">
 						<hr className={`border-4 ${getBarColor(rank)} transition-all duration-300`} style={{width : rank}}/>
@@ -136,24 +136,24 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 					<h1>DLC : <span className="font-normal">{rankInGame}</span></h1>
 					<div className=" bg-gray-500">
 						<hr className={`border-4 ${getBarColor(rankInGame)} ttransition-all duration-300`} style={{width : rankInGame}}/>
-					</div>
+					</div> */}
 				</div>
 			): shooter.includes(genre) ? (
-				<div className="flex flex-col w-full font-bold mb-4 px-3">
-					<h1>Rank : <span className="font-normal">{rank}</span></h1>
-					<p>Status :  <span className="font-normal">{completion}</span></p>
-					<h1>MMR : <span className="font-normal">{rankInGame}</span></h1>
+				<div className="flex flex-col w-full font-bold mb-4 px-3 text-[12px]">
+					<h1 className="">Rank : <span className="font-normal">{rank}</span></h1>
+					{/*<p>Status :  <span className="font-normal">{completion}</span></p>
+					 <h1>MMR : <span className="font-normal">{rankInGame}</span></h1> */}
 				</div>
 			) : (
-				<div className="flex flex-col w-full font-bold mb-4 px-3">
+				<div className="flex flex-col w-full font-bold mb-4 px-3 text-[12px]">
 					<h1>Rank : <span className="font-normal">{rank}</span></h1>
-					<p>Completion :  <span className="font-normal">{completion}</span></p>
-					<h1>Rank In Game : <span className="font-normal">{rankInGame}</span></h1>
+					{/* <p>Completion :  <span className="font-normal">{completion}</span></p>
+					<h1>Rank In Game : <span className="font-normal">{rankInGame}</span></h1> */}
 				</div>
 			)}
 
 
-			<div 
+			{/* <div 
 				className={` flex flex-row items-center justify-end w-full gap-2 px-4 py-3 rounded-b-md `}
 				style={{backgroundColor : secondColor}}
 			>
@@ -169,7 +169,7 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 
 				<button className="bg-red-500 px-2 rounded-md">Delete</button>
 
-			</div>
+			</div> */}
 		</div>
 
 

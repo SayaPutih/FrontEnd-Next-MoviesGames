@@ -99,29 +99,29 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 		>
 			
 			<div 
-				className="bg-third w-full text-center rounded-t-md text-md py-2 items-center"
+				className="bg-third w-full text-center rounded-t-md text-sm py-2 items-center"
 				style={{backgroundColor : firstColor , color : secondColor}}
 			>
-				<h1 className="text-md font-bold">{gameName}</h1>
+				<h1 className="text-sm font-bold">{gameName}</h1>
 			</div>
 
 			<div className="border-0 border-blue-900">
 
 				<img 
 					src={imageUrl && imageUrl.trim() !== ""  ? imageUrl : "https://placehold.co/300x300"} 
-					className="object-cover w-[50vh] h-[300px] xlg:-[350px]" 
+					className="object-  " 
 				/>
 			</div>
 
-			<div className="w-full px-3 my-2 flex-grow flex flex-col justify-start">
-				<p className=" flex flex-row items-center justify-between">
+			<div className="w-full px-1 my-2 flex-grow flex flex-col justify-start">
+				{/* <p className=" flex flex-row items-center justify-between">
 					<span className="flex flex-row gap-1">
-						<span className={`font-semibold rounded-md px-3 ${getColorThemeByGenre(genre)}`}>{genre}</span>
+						<span className={`font-semibold rounded-md px-2 ${getColorThemeByGenre(genre)}`}>{genre}</span>
 						<span className="bg-yellow-400  rounded-md px-2">{playYear}</span>
 					</span>
 					<span className="text-black font-bold flex items-center gap-1 ">{roundStar(rating)}<Star className="text-yellow-600" width={15}/></span>
-				</p>
-				<p className="font-semibold  mt-2">{desc ? trimParagraph(desc) : "Nothing"}</p>
+				</p> */}
+				{/* <p className="font-semibold  mt-2">{desc ? trimParagraph(desc) : "Nothing"}</p> */}
 
 			</div>
 
@@ -153,7 +153,7 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 			)}
 
 
-			<div 
+			{/* <div 
 				className={` flex flex-row items-center justify-end w-full gap-2 px-4 py-3 rounded-b-md `}
 				style={{backgroundColor : secondColor}}
 			>
@@ -169,7 +169,7 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 
 				<button className="bg-red-500 px-2 rounded-md">Delete</button>
 
-			</div>
+			</div> */}
 		</div>
 
 

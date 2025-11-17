@@ -33,7 +33,7 @@ const FavoriteMovieCardList =()=>{
 	},[])
 
 	return(
-		<div className="grid grid-cols-4 xborder-2 border-red-900 w-full gap-4 p-2 z-0 ">
+		<div className="grid grid-cols-1 md:grid-cols-4 xborder-2 border-red-900 w-full gap-4 p-2 z-0 ">
 			{allFavoriteMovie.map((a)=>{return(
 				<>
 					<FavoriteMovieCard

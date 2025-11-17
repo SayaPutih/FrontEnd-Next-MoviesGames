@@ -17,19 +17,19 @@ const FavoriteMoviePage =()=>{
 	return(
 		<div className="mb-2 w-full border-2x">
 			<div className="flex flex-col items-center justify-between">
-				<h1 className="text-4xl font-semibold text-first self-start">Favorite Movies Page</h1>
-				<div className="flex flex-row justify-between w-full items-center">
-					<div className="self-start flex flex-row items-center justify-center my-4 mx-2 gap-4 bg-black p-2 rounded-md w-2/8">
-						<div className="w-16 h-16 bg-first rounded-md"></div>
-						<div className="w-16 h-16 bg-second rounded-md"></div>
-						<div className="w-16 h-16 bg-third rounded-md"></div>
-						<div className="w-16 h-16 bg-subfirst rounded-md"></div>
-						<div className="w-16 h-16 bg-subsecond rounded-md"></div>
+				<h1 className="text-4xl font-semibold text-first sm:self-start">Favorite Movies Page</h1>
+				<div className="flex flex-col sm:flex-row justify-between w-full items-center">
+					<div className="self-start flex flex-row items-center justify-center my-4 sm:mx-2 gap-4 bg-black p-2 rounded-md sm:w-2/8">
+						<div className="w-14 sm:w-16 h-14 sm:h-16 bg-first rounded-md"></div>
+						<div className="w-14 sm:w-16 h-14 sm:h-16 bg-second rounded-md"></div>
+						<div className="w-14 sm:w-16 h-14 sm:h-16 bg-third rounded-md"></div>
+						<div className="w-14 sm:w-16 h-14 sm:h-16 bg-subfirst rounded-md"></div>
+						<div className="w-14 sm:w-16 h-14 sm:h-16 bg-subsecond rounded-md"></div>
 					</div>
 
 					
 
-					<div className="w-1/5">
+					<div className="sm:w-1/5 w-full flex items-center justify-center">
 						<AButton className="bg-second" label="Insert Movie" onClick={()=>{goToInsertPage()}}/>
 					</div>
 				</div>

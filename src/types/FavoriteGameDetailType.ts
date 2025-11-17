@@ -1,3 +1,5 @@
+import FavoriteCharacterDetailType from "./FavoriteCharacterDetailType";
+
 type FavoriteGameDetailType = {
 	id? : string;
 	companyId? : string;
@@ -18,6 +20,7 @@ type FavoriteGameDetailType = {
 	description? : string;
 	listOfPros? : string[];
 	listOfCons? : string[];
+	charDetails? : FavoriteCharacterDetailType[];
 }
 
 export default FavoriteGameDetailType;

@@ -22,6 +22,7 @@ type FavoriteCharacterInsert = {
 	secondColor : string,
 	thirdColor : string,
 	description : string,
+	imageUrl : string,
 }
 
 const InputCharacterPage =(
@@ -48,40 +49,55 @@ const InputCharacterPage =(
 	const[secondColor , setSecondColor ] = useState("");
 	const[thirdColor , setThirdColor ] = useState("");
 	const[description , setDescription ] = useState("");
+	const[imageUrl , setImageUrl] = useState("");
+
+	const[image , setImage ] = useState<File | null>(null);
 
 	const submitForm =async ()=>{
 
-		const submitData : FavoriteCharacterInsert ={
-				gameId,
-				mbtiId,
-				characterName,
-				bestSkillName,
-				rating,
-				type,
-				weapon,
-				roleInUniverse,
-				firstColor,
-				secondColor,
-				thirdColor,
-				description,
-			}
+		let uploadFileName = "";
+		if(image){
+			uploadFileName = await uploadImageGetFileName();
+		}
 
-		console.log("--Submiting--");
-		console.log(submitData);
-		console.log({
+		const submitData = {
+		  movieId: null,
 		  gameId,
-		  mbtiId,
-		  characterName,
+		  MBTIid: mbtiId,
+		  CharacterName: characterName,
 		  bestSkillName,
 		  rating,
 		  type,
-		  weapon,
+		  Weapon: weapon,
 		  roleInUniverse,
 		  firstColor,
 		  secondColor,
 		  thirdColor,
-		  description
+		  description,
+		  imageUrl: uploadFileName? uploadFileName : imageUrl,
+		};
+
+		console.log("--Submiting--");
+		console.log(submitData);
+		console.log({
+		  movieId: null,
+		  gameId,
+		  MBTIid: mbtiId,
+		  CharacterName: characterName,
+		  bestSkillName,
+		  rating,
+		  type,
+		  Weapon: weapon,
+		  roleInUniverse,
+		  firstColor,
+		  secondColor,
+		  thirdColor,
+		  description,
+		  imageUrl: uploadFileName? uploadFileName : imageUrl,
 		});
+
+		console.log("------------File name------------------------");
+		console.log(uploadFileName);
 
 		const submit = await upsertAFavoriteCharacter(
 			isGuid(id)? id :  "DBA6984F-4716-4239-BC23-31E8AEEF806B",
@@ -100,6 +116,29 @@ const InputCharacterPage =(
 	  return guidRegex.test(value);
 	};
 
+	const uploadImageGetFileName = async () => {
+	  if (!image) return imageUrl;
+
+	  const formData = new FormData();
+	  formData.append("file", image);
+	  formData.append("FileName", `${Date.now()}`);
+
+	  const res = await fetch("https://localhost:7160/api/v1/Files/upload-file", {
+	    method: "POST",
+	    body: formData
+	  });
+
+	  if (!res.ok) {
+	    console.error("UPLOAD ERROR", await res.text());
+	    return "";
+	  }
+	  console.log("-----res image ----------------")
+	  console.log(res);
+	  const data = await res.json();
+	  console.log("UPLOAD RESULT:", data);
+	  return data.fileName || data.FileName; // biar aman
+	};
+
 	useEffect(()=>{
 
 		setEditMode(isGuid(id))
@@ -109,7 +148,8 @@ const InputCharacterPage =(
 
 				if(isGuid(id)){
 					const res3 = await getCharacterWithFullDetailsById(id);
-
+					console.log("--RES 3----------------");
+					console.log(res3)
 					setGameId(res3.gameId)
 					setMbtiId(res3.mbtIid)
 					setCharacterName(res3.name)
@@ -122,6 +162,7 @@ const InputCharacterPage =(
 					setSecondColor(res3.secondColor)
 					setThirdColor(res3.thirdColor)
 					setDescription(res3.description)
+					setImageUrl(res3.imageUrl)
 				}
 
 				const res1 = await getAllMbti();
@@ -269,7 +310,7 @@ const InputCharacterPage =(
 			</div>
 
 			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
-				<label htmlFor = "firstColor">#1 Color</label>
+				<label htmlFor = "firstColor">#1 Color (Baground)</label>
 				<input 
 					id = "firstColor"
 					type = "color"
@@ -282,7 +323,7 @@ const InputCharacterPage =(
 			</div>
 
 			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
-				<label htmlFor = "">#2 Color</label>
+				<label htmlFor = "">#2 Color (Text)</label>
 				<input 
 					id = "secondColor"
 					type = "color"
@@ -295,7 +336,7 @@ const InputCharacterPage =(
 			</div>
 
 			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
-				<label htmlFor = "thirdColor">#3 Color</label>
+				<label htmlFor = "thirdColor">#3 Color (Banner)</label>
 				<input 
 					id = ""
 					type = "color"
@@ -320,6 +361,16 @@ const InputCharacterPage =(
 				/>
 			</div>
 
+			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
+				<label htmlFor = "image">image</label>
+				<input 
+					id = "image"
+					type = "file"
+					className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
+					onChange = {(e)=>setImage(e.target.files?.[0] || null)}
+				/>
+			</div>
+
 			<div className="col-start-5 col-span-2 p-3">
 				{!editMode ?
 					<AButton label="Submit" onClick={()=>submitForm()}/>
@@ -336,58 +387,21 @@ InputCharacterPage.layout = EvanderLayout;
 export default InputCharacterPage;
 
 /*
-
-{
-	gameId": '37f91681-34d9-4a33-b17a-7c10ee3204b1', "
-	mbtiId": 'b8ac38f2-b4a8-40f9-b7a3-02015ea016bd', "
-	characterName": 'DoctorStrangeReal', "
-	bestSkillName": 'string', "
-	rating": 10,"
-	bestSkillName": "string","
-	characterName": "DoctorStrangeReal","
-	description": "Blue Man","
-	firstColor": "#1c69e6","
-	gameId": "37f91681-34d9-4a33-b17a-7c10ee3204b1","
-	mbtiId": "b8ac38f2-b4a8-40f9-b7a3-02015ea016bd","
-	rating": 10,"
-	roleInUniverse": "string","
-	secondColor": "#ffed69","
-	thirdColor": "#7c97c2","
-	type": "string","
-	weapon ": "AAA","
-}
-
-
-f10746dd-f2a6-4d8a-ab6c-fbedbd7adc04
-{
-    "gameId": "623fe1f8-aa7f-439d-8e12-104750fd9647",
-    "mbtiId": "b8ac38f2-b4a8-40f9-b7a3-02015ea016bd",
-    "characterName": "Ash Ketchum",
-    "bestSkillName": "Ash Ketchum",
-    "rating": 4,
-    "type": "Ash Ketchum",
-    "weapon": "Ash Ketchum",
-    "roleInUniverse": "Ash Ketchum",
-    "firstColor": "#0b50da",
-    "secondColor": "#cc0f0f",
-    "thirdColor": "#2840f0",
-    "description": "Ash Ketchum"
-}
-
-0
+37500d94-9e89-4508-b9e2-e466a2457e2a
 {
     "gameId": "cb0f08f5-029c-4346-9719-24cc747822be",
-    "mbtiId": "",
+    "mbtiId": "fc3f89b0-f437-44e6-ab70-10b57e73c508",
     "characterName": "Sova",
     "bestSkillName": "Recon Dart",
     "rating": 8,
     "type": "Human",
     "weapon": "Odin",
     "roleInUniverse": "Agent",
-    "firstColor": "#f5f4ed",
-    "secondColor": "#38b3dd",
-    "thirdColor": "#263ca1",
-    "description": "Agent from Valorant my Favorite Agent because it has wallbang potential"
+    "firstColor": "#f5f4ee",
+    "secondColor": "#3eb5de",
+    "thirdColor": "#2d42a4",
+    "description": "My Main agent in Valorant",
+    "imageUrl": "https://placehold.co/600x400/EEE/31343C"
 }
 
 */

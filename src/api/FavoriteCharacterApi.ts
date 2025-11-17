@@ -25,3 +25,9 @@ export async function getCharacterWithFullDetailsById(id) : Promise<FavoriteChar
 	console.log(data.value);
 	return data.value;
 }
+
+export async function deleteCharacterById(id){
+	const res = await fetch(`https://localhost:7160//api/v1/Character/delete-character-by-id/${id}`)
+	if(!res.ok) return false;
+	return true
+}

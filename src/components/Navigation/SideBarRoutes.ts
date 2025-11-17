@@ -4,6 +4,18 @@ const sideBarRoutes  = [
 		label : "Home"
 	},
 	{
+		path : "/Form/GamesGallery",
+		label : "Hall Of Fame"
+	},
+	{
+		path : "/Form/xGamesGallery",
+		label : "Simplified Look"
+	},
+	{
+		path : "/Form/xxGamesGallery",
+		label : "More Simplified Look"
+	},
+	{
 		path : "/Form/FavoriteGame",
 		label : "Games"
 	},

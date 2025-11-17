@@ -36,6 +36,14 @@ const FavoriteMovieCard =({
 		return rate * 10
 	}
 
+	const cutWord =(words)=>{
+		const limit = 25;
+
+		if(words.length > 25) return words.slice(0,28) + ". . .";
+		
+		return words
+	}
+
 	const getColorRating=(rate)=>{
 		rate = rate * 10
 		if(rate > 90)
@@ -115,7 +123,7 @@ const FavoriteMovieCard =({
 				<div className="flex flex-row items-center justify-between w-full h-full my-1">
 					<div className="p-2 w-2/3 h-full ">
 						<h1 className="font-semibold text-[10px] xtext-first">{description ? description : "None"}</h1>
-						<h1 className="font-normal text-[9px] xtext-first">{desc ? desc : "None"}</h1>
+						<h1 className="font-normal text-[9px] xtext-first">{desc ? cutWord(desc) : "None"}</h1>
 					</div>
 					<div className={`${getColorRating(rating)} p-2 xbg-green-600 w-full h-full flex items-center justify-center h-full w-full w-1/3 rounded-md`}>
 						<h1 className="font-semibold text-2xl  xtext-subfirst">{getRating(rating)}</h1>

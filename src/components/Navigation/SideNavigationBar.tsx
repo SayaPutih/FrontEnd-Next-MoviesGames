@@ -1,6 +1,6 @@
 "use client"
 
-import React from "react";
+import React,{useState} from "react";
 import {usePathname,useRouter} from "next/navigation";
 import sideBarRoutes  from "./SideBarRoutes.ts";
 
@@ -17,9 +17,12 @@ const App =()=>{
 	const isActive =(currentRoute)=>{
 		return path === currentRoute;
 	}
+	
+
 
 	return(
-		<nav className = "w-1/6 flex items-start justify-start flex-col gap-[0.25rem] bg-third  ">
+		
+		<nav className = {`w-1/6 sm:flex items-start justify-start flex-col gap-[0.25rem] bg-third hidden `}>
 			
 			{
 				sideBarRoutes .map((a,i)=>{
