@@ -97,14 +97,22 @@ const FavoriteMovieCard =({
 
 			<div className="xborder-2 border-yellow-900 w-full h-4/6 relative">
 				
-				
+				{/*https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName= */}
 
-				<div className="p-4 z-10 flex w-full flex-col h-full">
-					<img className="" src="https://placehold.co/500x300" />
-					<h1 className="font-bold text-xl xtext-first">{movieName}</h1>
+				<div className="p-4 z-10 flex w-full flex-col items-center justify-between h-full border-4">
+					
+					<div className="w-[225px] h-1/2 flex flex-row items-center justify-center border-4 border-blue-900">
+						<img className="w-full h-full object-contain"
+							src={imageUrl ? `https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName=${imageUrl}` 
+							: 
+								"https://placehold.co/700x300"} 
+							/>
+					</div>
+
+					<h1 className="font-bold text-xl xtext-first text-start">{movieName}</h1>
 					<h1 className="font-semibold text-md xtext-first mb-4">{creatorName}</h1>
 
-					<div className="flex flex-row w-full gap-2">
+					<div className="flex flex-row w-full gap-2 self-end">
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{watchYear ? watchYear : NaN}</h1>
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{genre ? genre : "Def"}</h1>
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{playYear ? playYear : NaN}</h1>

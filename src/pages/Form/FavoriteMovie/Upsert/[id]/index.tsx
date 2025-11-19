@@ -21,6 +21,7 @@ type submitDataFavoriteMovieDetail = {
     secondColor : string,
     thirdColor : string,
     description : string,
+    imageUrl : string,
 };
 
 const UpsertAFavoriteMoviePage =()=>{
@@ -52,7 +53,12 @@ const UpsertAFavoriteMoviePage =()=>{
     }
 
     const onSubmit =async ()=>{
-        
+
+        let imageUrlReal = "";
+        if(imageFile){
+            imageUrlReal = await uploadImageMovie();
+        }
+
         const submitData: submitDataFavoriteMovieDetail = {
             companyId,
             movieName,
@@ -65,7 +71,8 @@ const UpsertAFavoriteMoviePage =()=>{
             firstColor,
             secondColor,
             thirdColor,
-            description
+            description,
+            imageUrl : imageUrlReal,
         };
 
         console.log("----------------------------");
@@ -94,6 +101,29 @@ const UpsertAFavoriteMoviePage =()=>{
         }else{
             alert(res);
         }
+    }
+
+    const [imageFile , setImageFile] = useState<File | null>(null);
+    const [imageUrl , setImageUrl] = useState("");
+
+    const uploadImageMovie =async ()=>{
+        if(!imageFile) return imageUrl;
+
+        const formData = new FormData();
+        formData.append("file",imageFile);
+        formData.append("FileName",`${Date.now()}`);
+
+        const res = await fetch(`https://localhost:7160/api/v1/Files/upload-file`,{
+            method : 'POST',
+            body : formData
+        });
+
+        if(!res.ok){
+            console.log("Upload Error : ")
+        }
+        const data = await res.json();
+
+        return data.fileName || data.FileName;
     }
 
     useEffect(()=>{
@@ -276,9 +306,17 @@ const UpsertAFavoriteMoviePage =()=>{
                 />
             </div> 
             
-             
+             <div className="xborder-2 flex flex-col p-2 col-span-2 col-start-1">
+                <label htmlFor="imageFile" className="text-second font-bold text-md mb-1" >Upload Image</label>
+                <input 
+                    className="bg-gray-900 font-semibold text-subfirst rounded-md text-md w-full p-2"
+                    id="imageFile"
+                    type="file"
+                    onChange={(a)=>setImageFile(a.target.files?.[0] || null)}
+                />
+            </div> 
 
-            <div className="col-start-6 w-full col-end-9 p-2">
+            <div className="col-start-6 w-full col-end-9 p-2 flex items-end justify-end">
                 <AButton label="Submit" className="w-full" onClick={()=>onSubmit()} />
             </div>
 
