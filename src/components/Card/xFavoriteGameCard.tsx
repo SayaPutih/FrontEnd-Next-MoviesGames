@@ -109,7 +109,7 @@ const FavoriteCharacterCard:ReactFC<FavoriteGameDetailType> =({
 
 				<img 
 					src={imageUrl && imageUrl.trim() !== ""  ? imageUrl : "https://placehold.co/300x300"} 
-					className="object-  " 
+					className="object-cover min-h-[200px] max-h-[200px]" 
 				/>
 			</div>
 

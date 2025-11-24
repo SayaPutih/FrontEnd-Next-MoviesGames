@@ -9,7 +9,7 @@ const sideBarRoutes  = [
 	},
 	{
 		path : "/Form/xGamesGallery",
-		label : "Simplified Look"
+		label : "Games Simplified"
 	},
 	{
 		path : "/Form/xxGamesGallery",

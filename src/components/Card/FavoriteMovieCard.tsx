@@ -58,12 +58,15 @@ const FavoriteMovieCard =({
 
 	return(
 		<div className="relative hover:scale-[1.01] group">
-		<div className="rounded-full bg-third z-10 p-2 -right-[10] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
+		<div className="rounded-full bg-third z-10 p-2 right-[35] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
 			<Pencil className=" " onClick={()=>toEditPage()}/>
+		</div>
+		<div className="rounded-full bg-first z-10 p-2 -right-[10] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
+			<Trash className=" " onClick={()=>toEditPage()}/>
 		</div>
 		<div
 				style={{backgroundColor : thirdColor}} 
-				className="border-red-400 xborder-2 h-[365] bg-gray-400 flex flex-col items-center justify-between overflow-hidden hover:shadow-2xl rounded-xl shadow-xl transition-all xhover:z-10 z-0  relative"
+				className="xborder-red-400 xborder-2 h-[365] xbg-gray-400 flex flex-col items-center justify-between overflow-hidden hover:shadow-2xl rounded-xl shadow-xl transition-all xhover:z-10 z-0  relative"
 			>
 			
 			{/*<img 
@@ -92,27 +95,27 @@ const FavoriteMovieCard =({
 				</div>
 			</div>*/}
 			<div className="absolute top-0 w-full z-0 h-2/6" style={{backgroundColor : firstColor}}></div>
-			<div className="absolute bottom-0 z-0 w-full  xh-1/6" style={{backgroundColor : secondColor}} ></div>
-			<div className="absolute bottom-0 z-0 w-full  xh-1/6" style={{backgroundColor : secondColor}} ></div>
+			<div className="absolute bottom-0 z-0 w-full  h-1/6" style={{backgroundColor : secondColor}} ></div>
+			{/* <div className="absolute bottom-0 z-0 w-full  h-1/8" style={{backgroundColor : secondColor}} ></div> */}
 
-			<div className="xborder-2 border-yellow-900 w-full h-4/6 relative">
+			<div className="xborder-2 xborder-yellow-900 w-full h-4/6 relative">
 				
 				{/*https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName= */}
 
-				<div className="p-4 z-10 flex w-full flex-col items-center justify-between h-full border-4">
+				<div className="p-4 z-10 flex w-full flex-col items-center justify-between h-full xborder-4">
 					
-					<div className="w-[225px] h-1/2 flex flex-row items-center justify-center border-4 border-blue-900">
-						<img className="w-full h-full object-contain"
+					<div className="w-[220px] h-1/2 flex flex-row items-center justify-center xborder-4 xborder-blue-900 ">
+						<img className="w-full h-full object-cover min-h-[120] mt-5"
 							src={imageUrl ? `https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName=${imageUrl}` 
 							: 
 								"https://placehold.co/700x300"} 
 							/>
 					</div>
 
-					<h1 className="font-bold text-xl xtext-first text-start">{movieName}</h1>
+					<h1 className="font-bold text-xl xtext-first text-start mt-4">{movieName}</h1>
 					<h1 className="font-semibold text-md xtext-first mb-4">{creatorName}</h1>
 
-					<div className="flex flex-row w-full gap-2 self-end">
+					<div className="flex flex-row w-full gap-2 self-end mt-5">
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{watchYear ? watchYear : NaN}</h1>
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{genre ? genre : "Def"}</h1>
 						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{playYear ? playYear : NaN}</h1>
