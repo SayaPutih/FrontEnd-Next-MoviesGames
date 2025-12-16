@@ -4,16 +4,20 @@ const sideBarRoutes  = [
 		label : "Home"
 	},
 	{
-		path : "/Form/GamesGallery",
-		label : "Hall Of Fame"
+		path : "/Form/HallOfFame",
+		label : "Hall Of Fame Games"
 	},
 	{
-		path : "/Form/xGamesGallery",
-		label : "Games Simplified"
+		path : "/Form/AllGameCard",
+		label : "All Game Card"
 	},
 	{
-		path : "/Form/xxGamesGallery",
-		label : "More Simplified Look"
+		path : "/Form/AllMovieCard",
+		label : "All Movie Card"
+	},
+	{
+		path : "/Form/GamesAndCharacter",
+		label : "Games And Character"
 	},
 	{
 		path : "/Form/FavoriteGame",

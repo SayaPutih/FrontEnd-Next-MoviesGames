@@ -1,6 +1,6 @@
 import React from "react";
 import EvanderLayout from "@/components/DefaultLayout";
-import GamesGalleryList from "@/components/Form/GamesGallery/xGamesGalleryList";
+import GamesGalleryList from "@/components/Form/GamesGallery/AllGameCard";
 
 const GamesGallery =()=>{
 	return(

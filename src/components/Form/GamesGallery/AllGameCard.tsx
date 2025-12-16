@@ -2,8 +2,8 @@
 
 import React,{useState,useEffect} from "react";
 import {getAllGamesAndCharacters} from "@/api/FavoriteCharacterDetailApi";
-import FavoriteGameCard from "@/components/Card/xFavoriteGameCard";
-import FavoriteCharacterCard from "@/components/Card/xFavoriteCharacterCard";
+import FavoriteGameCard from "@/components/Card/AllGameCard";
+import FavoriteCharacterCard from "@/components/Card/AllCharacterCard";
 import FavoriteGameDetailType from "@/types/FavoriteGameDetailType";
 
 const GamesGalleryList =()=>{

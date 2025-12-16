@@ -8,9 +8,11 @@ import {upsertAFavoriteCharacter} from "@/api/FavoriteCharacterDetailApi.ts";
 import {getCharacterWithFullDetailsById} from "@/api/FavoriteCharacterApi.ts";
 import AButton from "@/components/AButton.tsx";
 import {useParams} from "next/navigation";
+import {getAllFavoriteMovie} from "@/api/FavoriteMovieDetailApi";
 
 type FavoriteCharacterInsert = {
 	gameId : string,
+	movieId : string,
 	mbtiId : string,
 	characterName : string,
 	bestSkillName : string,
@@ -33,11 +35,14 @@ const InputCharacterPage =(
 	const id = params?.id;
 	
 	const[editMode , setEditMode] = useState(false);
+	const[isGame , setIsGame] = useState(true);
 
 	const[mbtiList , setMbtiList] = useState([]);
 	const[gameList , setGameList] = useState([]);
+	const[movieList, setMovieList] = useState([]);
 
 	const[gameId , setGameId] = useState("");
+	const[movieId, setMovieId] = useState("");
 	const[mbtiId , setMbtiId ] = useState("");
 	const[characterName , setCharacterName ] = useState("");
 	const[bestSkillName , setBestSkillName ] = useState("");
@@ -61,8 +66,8 @@ const InputCharacterPage =(
 		}
 
 		const submitData = {
-		  movieId: null,
 		  gameId,
+		  movieId,
 		  MBTIid: mbtiId,
 		  CharacterName: characterName,
 		  bestSkillName,
@@ -80,8 +85,8 @@ const InputCharacterPage =(
 		console.log("--Submiting--");
 		console.log(submitData);
 		console.log({
-		  movieId: null,
 		  gameId,
+		  movieId,
 		  MBTIid: mbtiId,
 		  CharacterName: characterName,
 		  bestSkillName,
@@ -111,6 +116,7 @@ const InputCharacterPage =(
 		}
 	}
 
+	
 	const isGuid = (value: string) => {
 	  const guidRegex = /^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$/;
 	  return guidRegex.test(value);
@@ -140,6 +146,7 @@ const InputCharacterPage =(
 	};
 
 	useEffect(()=>{
+		//https://localhost:7160/api/v1/Movie/GetAllFavoriteMovies
 
 		setEditMode(isGuid(id))
 
@@ -152,6 +159,7 @@ const InputCharacterPage =(
 					console.log(res3)
 					setGameId(res3.gameId)
 					setMbtiId(res3.mbtIid)
+					setMovieId(res3.movieId)
 					setCharacterName(res3.name)
 					setBestSkillName(res3.skill)
 					setRating(res3.rating)
@@ -167,7 +175,9 @@ const InputCharacterPage =(
 
 				const res1 = await getAllMbti();
 				const res2 = await getAllFavoriteGame();
+				const res4 = await getAllFavoriteMovie();
 				
+				setMovieList(res4);
 				setMbtiList(res1);
 				setGameList(res2);
 
@@ -189,27 +199,79 @@ const InputCharacterPage =(
 	return(
 		<div className="x w-full p-2 grid grid-cols-6 flex flex-col items-center justify-center bg-third rounded-md mb-20 text-second font-bold text-md">
 
-			<div className="flex  flex-col items-start justify-start h-full col-span-3 p-2 gap-2">
-				<label htmlFor = "gameId">Game Id</label>
-				<select 
-					id = "gameId"
-					value = {gameId}
-					type = "text"
-					
-					placeholder = ""
-					className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
-					onChange = {(e)=>setGameId(e.target.value)}
+			{isGame ? (
+				<div className="flex  flex-col items-start justify-start h-full col-span-5 p-2 gap-2">
+					<label htmlFor = "gameId">Game Id</label>
+					<select 
+						id = "gameId"
+						value = {gameId}
+						
+						placeholder = ""
+						className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
+						onChange = {(e)=>setGameId(e.target.value)}
+					>
+						<option value="" disabled>--Select A Game--</option>
+						{
+							gameList.map((a,i)=>{
+								return(
+									<option key={a.id} value={a.id}>{a.gameName}</option>
+								)
+							})
+						}
+					</select>
+				</div>
+			) : (
+				<div className="flex  flex-col items-start justify-start h-full xborder-2 w-full col-span-5 p-2 gap-2">
+					<label htmlFor = "movieId">Movie Id</label>
+					<select 
+						id = "movieId"
+						value = {movieId}
+						
+						placeholder = ""
+						className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
+						onChange = {(e)=>setMovieId(e.target.value)}
+					>
+						<option value="" disabled>--Select A Movie--</option>
+						{
+							movieList.map((a,i)=>{
+								return(
+									<option key={a.id} value={a.id}>{a.movieName}</option>
+								)
+							})
+						}
+					</select>
+				</div>
+			)}
+
+			<div className="flex flex-col items-center justify-center col-span-1 ">
+				<label className="mb-2">Select {isGame? 'Game' : 'Movie'}</label>
+				<div 
+					className={`bg-gray-900 w-[4.5rem] h-10 transition-all rounded-xl p-1`}
+					onClick={()=>setIsGame(!isGame)}
 				>
-					<option value="" disabled>--Select A Game--</option>
-					{
-						gameList.map((a,i)=>{
-							return(
-								<option key={a.id} value={a.id}>{a.gameName}</option>
-							)
-						})
-					}
-				</select>
+					<div className={`transition-all w-8 h-8 
+						${isGame ? 'bg-green-500 rounded-xl' : ' rounded-xl bg-blue-500 translate-x-8'}`}
+						></div>
+				</div>
 			</div>
+
+			{/* Switch isGame 
+			<div className="flex flex-col col-span-1 items-start gap-1">
+				<label className="text-sm opacity-80">Category</label>
+				<button
+					onClick={() => setIsGame(!isGame)}
+					className={`w-14 h-7 rounded-full flex items-center transition-all ${
+						isGame ? "bg-blue-600" : "bg-green-600"
+					}`}
+				>
+					<div
+						className={`w-6 h-6 bg-white rounded-full ml-1 transition-all ${
+							isGame ? "translate-x-7" : "translate-x-0"
+						}`}
+					/>
+				</button>
+				<span className="text-xs opacity-70">{isGame ? "Game Mode" : "Movie Mode"}</span>
+			</div>*/}
 
 			<div className="flex  flex-col items-start justify-start h-full col-span-3 p-2 gap-2">
 				<label htmlFor = "mbtiId">MBTI Id</label>
@@ -270,7 +332,7 @@ const InputCharacterPage =(
 				/>
 			</div>
 
-			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-3">
+			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
 				<label htmlFor = "type">Type</label>
 				<input 
 					id = "type"
@@ -283,7 +345,7 @@ const InputCharacterPage =(
 				/>
 			</div>
 
-			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-3">
+			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
 				<label htmlFor = "weapon">Weapon</label>
 				<input 
 					id = "weapon"
@@ -296,7 +358,7 @@ const InputCharacterPage =(
 				/>
 			</div>
 
-			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-3">
+			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-2">
 				<label htmlFor = "roleInUniverse">Role In Universe</label>
 				<input 
 					id = "roleInUniverse"
@@ -306,6 +368,19 @@ const InputCharacterPage =(
 					placeholder = ""
 					className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
 					onChange = {(e)=>setRoleInUniverse(e.target.value)}
+				/>
+			</div>
+			
+			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-6">
+				<label htmlFor = "description">Description</label>
+				<textarea 
+					id = "description"
+					type = "text"
+					value = {description}
+					
+					placeholder = ""
+					className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
+					onChange = {(e)=>setDescription(e.target.value)}
 				/>
 			</div>
 
@@ -345,19 +420,6 @@ const InputCharacterPage =(
 					placeholder = ""
 					className="w-full bg-gray-900 text-white font-semibold rounded-md"
 					onChange = {(e)=>setThirdColor(e.target.value)}
-				/>
-			</div>
-
-			<div className="flex  flex-col items-start justify-start h-full  p-2 gap-2 col-span-6">
-				<label htmlFor = "description">Description</label>
-				<textarea 
-					id = "description"
-					type = "text"
-					value = {description}
-					
-					placeholder = ""
-					className="w-full p-2 bg-gray-900 text-white font-semibold rounded-md "
-					onChange = {(e)=>setDescription(e.target.value)}
 				/>
 			</div>
 

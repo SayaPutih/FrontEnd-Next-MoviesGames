@@ -14,7 +14,7 @@ const FavoriteCharacterCardList =()=>{
 	const router = useRouter();
 
 	const [allChar,setAllChar] = useState<FavoriteCharacterType[]>([]);
-	const [showEdit,setShowEdit] = useState(true);
+	const [showEdit,setShowEdit] = useState(false);
 
 	const [search, setSearch] = useState("");
 	const [ratingMin ,setRatingMin] = useState(0);
@@ -133,14 +133,14 @@ const FavoriteCharacterCardList =()=>{
 						<div key = {a.id} className="relative">
 
 							{showEdit && 
-								<>
+								<div className="">
 									<div className="rounded-full bg-yellow-300 p-2 absolute right-6 -top-5 z-15 w-8 h-8 flex items-center hover:bg-orange-900 hover:scale-[1.25] transition-all">
 										<Pencil w={16} className="xabsolute text-yellow-500  xtop-5 xz-10" onClick={()=>goToEditPage(a.id)}/>
 									</div>
 									<div key = {a.id} className="rounded-full bg-red-300 p-2 absolute -right-3 -top-5 z-15 w-8 h-8 flex items-center hover:bg-red-900 hover:scale-[1.25] transition-all">
 										<Trash w={16} className="xabsolute text-red-500  xtop-5 xz-10" onClick={()=>deleteCharacter(a.id)}/>
 									</div>
-								</>
+								</div>
 							}
 
 							<FavoriteCharacterCard 

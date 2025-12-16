@@ -1,4 +1,11 @@
+/*
+Atas | Bawah
+1. Marron | Hitem -> Classical Event Vibes
+2. Marron | Putih -> Christmas and Holiday Vibes
+3. Putih | Hitem -> Bagus cocok bisa di pake buat kerja serta hal2 profesional dan event
 
+Paling atas paling bagus
+*/
 
 import React,{ReactElement} from "react";
 import {Layout} from "antd";

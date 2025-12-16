@@ -29,11 +29,11 @@ const App =()=>{
 					return(
 					<div 
 						key = {i}
-						className={` text-black flex items-center  justify-center shadow-lg text-second w-full p-2 ${isActive(a.path) ? "bg-yellow-100" : ""}`}
+						className={`hover:bg-yellow-100/50 text-black flex items-center  justify-center shadow-lg text-second w-full p-2 ${isActive(a.path) ? "bg-yellow-100" : ""}`}
 					>
 						<button 
 							onClick={()=>redirectPage(a.path)} 
-							className={`font-bold ${isActive(a.path) ? " text-first" : "text-yellow-600"}`}
+							className={`font-bold ${isActive(a.path) ? " text-first scale-105" : "text-yellow-600"}`}
 						>
 							{a.label}
 						</button>

@@ -4,6 +4,9 @@ import FavoriteMovieDetail from "@/types/FavoriteMovieDetailType";
 import { Pencil,Trash } from 'lucide-react';
 import {useRouter} from "next/navigation";
 
+import DeleteModal from "@/components/Modal/DeleteModal"
+import {deleteMoviesById} from "@/api/FavoriteMovieApi";
+
 const FavoriteMovieCard =({
 	id,
 	movieName,
@@ -44,6 +47,17 @@ const FavoriteMovieCard =({
 		return words
 	}
 
+	const [openDelete , setOpenDelete] = useState(false);
+	const deleteThisCard =async (CurId : string)=>{
+		try{
+			await deleteMoviesById(CurId);
+			setOpenDelete(false);
+		}catch(err){
+			console.log("-----Error Bagian Card");
+			console.error(err);
+		}
+	}
+
 	const getColorRating=(rate)=>{
 		rate = rate * 10
 		if(rate > 90)
@@ -57,12 +71,15 @@ const FavoriteMovieCard =({
 	}
 
 	return(
+		<>
 		<div className="relative hover:scale-[1.01] group">
+
 		<div className="rounded-full bg-third z-10 p-2 right-[35] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
 			<Pencil className=" " onClick={()=>toEditPage()}/>
 		</div>
 		<div className="rounded-full bg-first z-10 p-2 -right-[10] -top-[10] absolute min-w-[10] items-center justify-center hidden group-hover:flex">
-			<Trash className=" " onClick={()=>toEditPage()}/>
+			<Trash className=" " onClick={()=>setOpenDelete(true)}/>
+
 		</div>
 		<div
 				style={{backgroundColor : thirdColor}} 
@@ -146,6 +163,17 @@ const FavoriteMovieCard =({
 
 		</div>
 		</div>
+
+		{openDelete && 
+			<DeleteModal 
+				title="Favorite Movies" 
+				message = {movieName} 
+				onClickPassedAccept={()=>deleteThisCard(id)}
+				onClickPassedCancel={()=>setOpenDelete(false)}
+			/>
+		}
+
+		</>
 	)
 }
 
