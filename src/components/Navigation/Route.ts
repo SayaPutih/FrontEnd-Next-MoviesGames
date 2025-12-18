@@ -4,6 +4,10 @@ const routes = [
 		label : "Home"
 	},
 	{
+		link : "/Movies",
+		label : "Movies",
+	},
+	{
 		link : "/Form",
 		label : "Form",
 	},

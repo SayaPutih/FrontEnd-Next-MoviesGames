@@ -8,7 +8,7 @@ const App=()=>{
 
   return (
     <div className=" m-2 p-2">
-        Page
+        Page Home
     </div>
   );
 }
