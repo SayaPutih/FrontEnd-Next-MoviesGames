@@ -14,6 +14,7 @@ const FavoriteMovieCardList =()=>{
 	const path = usePathname();
 
 	const [allFavoriteMovie , setAllFavoriteMovie] = useState<FavoriteMovieDetail[]>([]);
+	const [searchName,setSearchName] = useState("");
 
 	useEffect(()=>{
 
@@ -32,9 +33,22 @@ const FavoriteMovieCardList =()=>{
 
 	},[])
 
+	const sortedArray = allFavoriteMovie.filter((a)=>a.movieName.toLowerCase().includes(searchName.toLowerCase()));
+
 	return(
+		<>
+		<div className="flex flex-col gap-2 w-full">
+			<label className="text-xs text-gray-800">Find Movie</label>
+			<input
+				value={searchName}
+				onChange={(e)=>setSearchName(e.target.value)}
+				className="bg-gray-800 p-2 rounded-md border-0 text-md text-third font-bold"
+				type="text"
+			/>
+		</div>
 		<div className="grid grid-cols-1 md:grid-cols-4 xborder-2 border-red-900 w-full gap-4 p-2 z-0 ">
-			{allFavoriteMovie.map((a)=>{return(
+			
+			{sortedArray.map((a)=>{return(
 				<>
 					<FavoriteMovieCard
 						className="z-0"
@@ -47,6 +61,7 @@ const FavoriteMovieCardList =()=>{
 				</>
 				)})}
 		</div>
+		</>
 	)
 }
 

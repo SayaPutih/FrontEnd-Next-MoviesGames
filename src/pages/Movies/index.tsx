@@ -4,8 +4,7 @@ import MovieCardList from "@/components/Movie/MovieCardList";
 
 const MoviePage =()=>{
 	return(
-		<section>
-			Movie Page Section
+		<section className="h-full w-full pb-10">
 			<MovieCardList />
 		</section>
 	)

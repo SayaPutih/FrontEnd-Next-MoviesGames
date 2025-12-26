@@ -28,13 +28,15 @@ const MovieCardList =()=>{
 	},[])
 
 	return(
-		<div>
-			Movie Page div
-			{allMovies.map((a)=>{
-				return(
-					<MovieCard key={a.id} movie={a} />
-				)
-			})}
+		<div className="border-2 h-full w-full p-2 ">
+			<h1 className="text-first text-xl font-bold text-start border-2 mb-2">Movie Page div</h1>
+			<div className="grid grid-cols-4 gap-4 p-4">
+				{allMovies.map((a)=>{
+					return(
+						<MovieCard key={a.id} movie={a} />
+					)
+				})}
+			</div>
 		</div>
 	)
 }
