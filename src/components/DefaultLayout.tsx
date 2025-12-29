@@ -1,11 +1,3 @@
-/*
-Atas | Bawah
-1. Marron | Hitem -> Classical Event Vibes
-2. Marron | Putih -> Christmas and Holiday Vibes
-3. Putih | Hitem -> Bagus cocok bisa di pake buat kerja serta hal2 profesional dan event
-
-Paling atas paling bagus
-*/
 
 import React,{ReactElement} from "react";
 import {Layout} from "antd";
@@ -42,6 +34,66 @@ const EvanderLayout : React.FC<{children : React.ReactNode}>=({
 
 const WithEvanderLayout = (page: ReactElement) => <EvanderLayout>{page}</EvanderLayout>
 export default WithEvanderLayout;
+
+/*
+Atas | Bawah
+1. Marron | Hitem -> Classical Event Vibes
+2. Marron | Putih -> Christmas and Holiday Vibes
+3. Putih | Hitem -> Bagus cocok bisa di pake buat kerja serta hal2 profesional dan event
+
+
+
+Paling atas paling bagus
+
+
+
+
+30 Des----
+Lat Pulldown lat 8x4 Sub
+Preacher Bar Curl 8x4
+Face Pull 10x3 SUb
+Barbell Row 8x4
+Dumbell lat Pullover 12x3
+Barbell Shrugs 12x1
+Dumbell Shrugs 12x2
+Incline Bicep Curl 12x3
+
+31 Des----
+Gallon Squad
+Db Rdl
+Bulgarian Squad
+Gallon Calf 
+Db Calf
+
+1 Jan--------
+Push Ups
+Ascended Push Ups
+Gallon Shrugs
+
+3 Jan-------
+Short Hand Lat Pull Down
+Bar Cable Row
+Smith Shrugs -> Change New Wo (Pullover)
+Reverse Fly
+Bicep Curl
+
+4 Jan-----
+Dumbell Bench Press
+Tricep KickBack
+Low Cable Fly
+Tricep Extention bar
+
+
+---------
+Multi Press
+Cable Long Pushdown
+T Bar Row
+Single Arm Pull Down
+
+*/
+
+
+
 
 
 		// <Layout className="h-screen flex flex-col !p-0">

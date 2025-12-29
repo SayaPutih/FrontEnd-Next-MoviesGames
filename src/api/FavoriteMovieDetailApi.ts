@@ -14,12 +14,13 @@ export async function getFavoriteMovieById(id : string) : Promise<FavoriteMovieD
 	return res.json();
 }
 
-export async function upsertAFavoriteMovie(id : string,body) : Promise<FavoriteMovieDetail[]>{
+export async function upsertAFavoriteMovie(id : string,body,insert : boolean) : Promise<FavoriteMovieDetail[]>{
+
 	const res = await fetch(`${BASE_URL}insert-or-edit-favorite-movie-detail/${id}`,{
-		method : 'PUT',
-		headers : {"Content-Type" : "application/json"},
-		body : JSON.stringify(body)
-	});
+			method : 'PUT',
+			headers : {"Content-Type" : "application/json"},
+			body : JSON.stringify(body)
+		});
 
 	if(!res.ok){
 		throw new Error("Fetching Data Not Ok")

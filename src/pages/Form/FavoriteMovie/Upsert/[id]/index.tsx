@@ -7,6 +7,7 @@ import CompanyType from "@/types/CompanyType";
 import {useParams,useRouter} from "next/navigation";
 import EvanderLayout from "@/components/DefaultLayout";
 import AButton from "@/components/AButton";
+import {v4 as uuidv4} from "uuid";
 
 type submitDataFavoriteMovieDetail = {
     movieName : string,
@@ -81,6 +82,7 @@ const UpsertAFavoriteMoviePage =()=>{
         const res = await upsertAFavoriteMovie(
                 isGuid(id) ? id :  "623fe1f8-aa7f-439d-8e12-104750fd9647"
                 ,submitData
+                ,isGuid(id) ? false : true
             );
         
         // if(isGuid(id)){

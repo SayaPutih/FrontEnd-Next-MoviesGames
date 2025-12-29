@@ -7,6 +7,7 @@ import {useRouter} from "next/navigation";
 import DeleteModal from "@/components/Modal/DeleteModal"
 import {deleteMoviesById} from "@/api/FavoriteMovieApi";
 
+//5a3e502e-68b7-4cf9-818b-10e9a93017a9
 const FavoriteMovieCard =({
 	id,
 	movieName,
@@ -52,6 +53,7 @@ const FavoriteMovieCard =({
 		try{
 			await deleteMoviesById(CurId);
 			setOpenDelete(false);
+			router.refresh();
 		}catch(err){
 			console.log("-----Error Bagian Card");
 			console.error(err);
@@ -68,6 +70,11 @@ const FavoriteMovieCard =({
 			return "text-yellow-500 bg-yellow-300"
 
 		return "text-red-700 bg-red-500"
+	}
+
+	const trimWord=(word)=>{
+		if(word.length > 6) return word.slice(0,6) + "..."
+		return word
 	}
 
 	return(
@@ -112,37 +119,44 @@ const FavoriteMovieCard =({
 				</div>
 			</div>*/}
 			<div className="absolute top-0 w-full z-0 h-2/6" style={{backgroundColor : firstColor}}></div>
-			<div className="absolute bottom-0 z-0 w-full  h-1/6" style={{backgroundColor : secondColor}} ></div>
+			{/* <div className="absolute bottom-0 z-0 w-full  h-1/6" style={{backgroundColor : secondColor}} ></div> */}
 			{/* <div className="absolute bottom-0 z-0 w-full  h-1/8" style={{backgroundColor : secondColor}} ></div> */}
 
 			<div className="xborder-2 xborder-yellow-900 w-full h-4/6 relative">
 				
 				{/*https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName= */}
 
-				<div className="p-4 z-10 flex w-full flex-col items-center justify-between h-full xborder-4">
+				<div className="z-10 flex w-full flex-col items-center justify-between h-full xborder-4">
 					
-					<div className="w-[220px] h-1/2 flex flex-row items-center justify-center xborder-4 xborder-blue-900 ">
-						<img className="w-full h-full object-cover min-h-[120] mt-5"
+					<div className="w-[100%] h-1/2 flex flex-row items-center justify-center xborder-4 xborder-blue-900 ">
+						<img className="w-full h-full object-top object-fit min-h-[160px] mt-5"
 							src={imageUrl ? `https://localhost:7160/api/v1/Files/get-file-WithExtention?fileName=${imageUrl}` 
 							: 
-								"https://placehold.co/700x300"} 
+								"https://placehold.co/1400x800"} 
 							/>
 					</div>
 
-					<h1 className="font-bold text-xl xtext-first text-start mt-4">{movieName}</h1>
-					<h1 className="font-semibold text-md xtext-first mb-4">{creatorName}</h1>
+					<h1 className="font-bold text-xl xtext-first text-start mt-10">{movieName}</h1>
+					<h1 className="font-semibold text-md xtext-first mb-2">{creatorName}</h1>
 
-					<div className="flex flex-row w-full gap-2 self-end mt-5">
-						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{watchYear ? watchYear : NaN}</h1>
-						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{genre ? genre : "Def"}</h1>
-						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white">{playYear ? playYear : NaN}</h1>
+					<div className="flex flex-row w-full gap-2 self-end mt-2 px-2"
+						
+					>
+						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white"
+						style = {{borderColor : secondColor ? secondColor : "white",color : secondColor ? secondColor : "white"}}>{watchYear ? watchYear : NaN}</h1>
+						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white"
+						style = {{borderColor : secondColor ? secondColor : "white",color : secondColor ? secondColor : "white"}}>{genre ? trimWord(genre) : "Def"}</h1>
+						<h1 className="font-normal w-1/6 border-[0.1rem] rounded-md p-[0.95px] text-center text-[10px] text-white"
+						style = {{borderColor : secondColor ? secondColor : "white",color : secondColor ? secondColor : "white"}}>{playYear ? playYear : NaN}</h1>
 					</div>
 
 				</div>
 
 			</div>
 
-			<div className="bxorder-2 border-yellow-900 w-full h-2/6 p-2 flex flex-col justify-between relative">
+			<div className="bxorder-2 border-yellow-900 w-full h-2/6 p-2 flex flex-col justify-between relative"
+				
+			>
 
 				
 
