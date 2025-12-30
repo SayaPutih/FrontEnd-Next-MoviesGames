@@ -6,7 +6,6 @@ const MoviePage =()=>{
 	return(
 		<section className="h-full w-full pb-10 mb-10">
 			<MovieCardList />
-			
 		</section>
 	)
 }
