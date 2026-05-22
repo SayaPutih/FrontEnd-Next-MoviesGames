@@ -8,7 +8,7 @@ interface AButtonProps{
 const AButton:React.FC<string> =({label,onClick})=>{
 	return(
 		<button 
-			className="w-full m-2 p-2 bg-blue-500 text-subfirst text-md rounded-md font-bold"
+			className="w-full m-2 p-2 bg-blue-500 text-subfirst  text-md rounded-md font-bold"
 			onClick = {()=>onClick()}
 		>
 			{label}
